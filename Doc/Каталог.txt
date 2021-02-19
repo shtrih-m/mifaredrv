@@ -1,0 +1,30 @@
+*****************************************************
+
+  Работа с каталогом
+
+*****************************************************
+
+1. Методы для работы с каталогом.
+
+  ReadDirectory
+  ПрочестьКаталог
+
+  Читает каталог карты.
+  Используемые свойства : -
+  Изменяемые свойства   : SectorCount
+
+
+  SectorCount - количество секторов каталога
+
+  Получить и установить параметры сектора каталога можно
+  при помощи методов GetSectorParams и SetSectorParams.
+  
+  for i := 0 to Driver.SectorCount - 1 do
+  begin
+    Driver.SectorIndex := i;
+    Check(Driver.GetSectorParams);
+    AddLine('Номер сектора  : ' + IntToStr(Driver.SectorNumber));
+    AddLine('Код фирмы      : ' + IntToStr(Driver.FirmCode));
+    AddLine('Код приложения : ' + IntToStr(Driver.AppCode));
+  end;
+

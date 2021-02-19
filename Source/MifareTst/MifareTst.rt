@@ -1,0 +1,31 @@
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION ${comma.version}
+PRODUCTVERSION ${comma.version} 
+FILEFLAGSMASK 0x3fL
+FILEFLAGS 0x0L
+FILEOS 0x4L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "041904E3"
+    BEGIN
+      VALUE "CompanyName", "ШТРИХ-М, 2021"
+      VALUE "FileDescription", "Тест считывателей Mifare"
+      VALUE "FileVersion", "${version}"
+      VALUE "InternalName", "Тест считывателей Mifare\0"
+      VALUE "LegalCopyright", "Copyright \251 2010 \0"
+      VALUE "OriginalFilename", "MifareTst.exe\0"
+      VALUE "ProductName", "Тест считывателей Mifare\0"
+      VALUE "ProductVersion","${version2}\0"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 1049,1251
+  END
+END
+
+MAINICON  ICON  DISCARDABLE  "icon.ico"

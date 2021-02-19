@@ -1,0 +1,42 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = MifareTst.exe AddCfg80.exe MifareDrv.dll MifareDrvTest.exe \
+  MifareDrvTestLib.exe MifareTstTest.exe MifareTstTestLib.dll AcceptTest.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+MifareDrv.dll: MifareDrv\MifareDrv.dpr
+  $(DCC)
+
+MifareTst.exe: MifareTst\MifareTst.dpr
+  $(DCC)
+
+AddCfg80.exe: AddCfg80\AddCfg80.dpr
+  $(DCC)
+
+MifareDrvTestLib.exe: ..\Tests\MifareDrvTest\MifareDrvTestLib.dpr
+  $(DCC)
+
+MifareDrvTest.exe: ..\Tests\MifareDrvTest\MifareDrvTest.dpr
+  $(DCC)
+
+MifareTstTest.exe: ..\Tests\MifareTstTest\MifareTstTest.dpr
+  $(DCC)
+
+MifareTstTestLib.dll: ..\Tests\MifareTstTest\MifareTstTestLib.dpr
+  $(DCC)
+
+AcceptTest.exe: ..\Tests\AcceptTest\AcceptTest.dpr
+  $(DCC)
+
+

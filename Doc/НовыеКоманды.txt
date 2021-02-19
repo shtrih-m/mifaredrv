@@ -1,0 +1,44 @@
+ Кузнецов Константин (16:31:22 17/10/2011) 
+0xF0://Управление светодиодами и опрос кнопки
+и
+0xF2://Управление светодиодами
+
+Добавился жёлтый светодиод на 3-м бите
+
+
+0x30://Return SAM AV2 module Uid
+Возвращает 1 байт статуса + 0x1F (31)  байт
+Описание этих 31 байта в M409_MIFARE_SAM_AV2_Command_Overview_and_Exercise_AIv11.01, на странице 11, SAM_GetVersion command. См. почту
+
+
+
+case 0x31://Write Mifare keyA and keyB to SAM AV2 module
+- Запись ключей Mifare A и B в SAM AV2 модуль.
+
+Input: KeyNumber (1) + KeyPos(1) + KeyVersion(1) + KeyA (6) + KeyB (6)
+KeyNumber - номер ключа (значения 1 - 255)
+
+KeyPos - позиция ключа (значения 0, 1, 2)
+
+KeyVersion - версия ключа в заданной позиции
+
+KeyA - ключ A (6 байт)
+KeyB - ключ B (6 байт)
+
+
+
+case 0x32://Auth to PICC
+- Авторизация по ключу
+
+//Input: KeyType(1) + KeyNumber(1) + KeyVersion(1) + MfcBlock(1)
+KeyType - тип ключа (A или B)
+Значения KeyType
+ PICC_AUTHENT1A = 0x60    //!< authentication using key A
+или
+ PICC_AUTHENT1B     0x61         //!< authentication using key B
+
+KeyNumber - номер ключа (значения 1 - 255)
+
+KeyVersion - версия ключа (значения 0 - 255)
+
+MfcBlock - номер блока на карте для аторизации (0 - 255)

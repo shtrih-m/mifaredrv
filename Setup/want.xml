@@ -1,0 +1,226 @@
+<!--
+  WANT - A build management tool.                                 
+  Copyright (c) 2001-2003 Juancarlo Anez, Caracas, Venezuela.          
+  All rights reserved.
+  
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+  
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+{ $Id: want.xml,v 1.83 2004/05/29 17:23:09 juanco Exp $ }
+
+This is the Want script for building Want.
+See http://www.suigeneris.org/want/ for details.
+-->
+<project name="mifaredrv" basedir="./.." default="compile" >
+
+  <property name="basepath" value="" />
+  <regexp property="basepath" text="${basedir}" pattern="^\/" subst="" />
+
+  <property name="setup"        value="${basepath}/setup" />
+  <property name="bin"          value="${setup}/bin" />
+  <property name="dcu"          value="${setup}/dcu" />
+  <property name="src"          value="${basepath}/source" />
+  <property name="test"         value="${basepath}/tests" />
+  <property name="mifaredrv"    value="${basepath}/source/mifaredrv" />
+  <property name="mifaretst"    value="${basepath}/source/mifaretst" />
+  <property name="cfgmgr1C"     value="${basepath}/source/cfgmgr1C" />
+
+  <property name="old.version"    value="?{${setup}/release.ini:releases:current}" />
+  <regexp   property="old.build"  text="${old.version}" pattern="^.*\.([0-9]+)$" subst ="\1" />
+  <property name="build" value="={${old.build}}"/>
+  <regexp property="version" text="${old.version}" pattern="\.[0-9]*$" subst=".${build}" />
+  <regexp property="comma.version" pattern="\." subst="," text="${version}" />
+  <regexp property="version2" pattern="^[0-9]*\.[0-9]*" text="${version}" />
+
+  <tstamp>
+    <format property="when"      pattern="yyyy,mm,dd,HH,nn,ss" />
+    <format property="date.tag"  pattern="yyyy-mm-dd" />
+  </tstamp>
+
+  <patternset id="sources" >
+    <include  name="${stp}" />
+    <include  name="${src}" />
+    <include  name="${src}/**" />
+  </patternset>
+
+  <target name="prepare" >
+    <mkdir dir="${dcu}" />
+    <mkdir dir="${bin}" />
+    <echo message="version=${version}" />
+    <echo message="build=${build}" />
+    <delete dir="${dcu}" >
+      <include name="*.dcu" />
+    </delete>
+  </target>
+
+  <target name="clean">
+    <delete dir="${dcu}" >
+      <include name="*.dcu" />
+    </delete>
+    <delete dir="${bin}" >
+      <include name="*.dll" />
+      <include name="*.exe" />
+      <include name="*.log" />
+    </delete>
+    <delete dir="${basepath}" >
+      <include name="*.exe" />
+    </delete>
+  </target>
+
+  <target name="finalclean">
+    <delete dir="${dcu}" >
+      <include name="*.dcu" />
+    </delete>
+    <delete dir="${bin}" >
+      <include name="*.dll" />
+      <include name="*.exe" />
+      <include name="*.log" />
+    </delete>
+    <delete dir="${basepath}" >
+      <include name="*.exe" />
+    </delete>
+  </target>
+  
+  <target name="test-mifaredrv" depends="prepare">
+    <delete dir="${dcu}" >
+      <include name="*.dcu" />
+    </delete>
+    <dcc basedir="${test}/mifaredrvtest" source="mifaredrvtestlib.dpr" >
+      <exeoutput path="${test}/mifaredrvtest/Bin" />
+      <dcuoutput path="${dcu}"  />
+      <build     value="true" />
+      <debug     value="true" />
+      <console   value="true" />
+      <writeableconst value="true" />
+      <warnings value="true" />
+      <warning name="SYMBOL_PLATFORM" value="off" />
+      <warning name="SYMBOL_DEPRECATED" value="off" />
+      <warning name="UNIT_PLATFORM" value="off" />
+      <warning name="UNSAFE_CODE" value="off" />
+      <warning name="UNSAFE_TYPE" value="off" />
+      <warning name="UNSAFE_CAST" value="off" />
+      <hints value="true" />
+      <define name="DUNIT_DLL" />
+      <define name="DEBUG" />
+      <define name="SUPPORTS_WIDESTRING" />
+    </dcc>
+    <dunit testlib="${test}/mifaredrvtest/bin/mifaredrvtestlib" />
+  </target> 
+  
+  <target name="compile-mifaredrv" depends="prepare">
+    
+    <delete dir="${dcu}" >
+      <include name="*.dcu" />
+    </delete>
+    
+    <echo input="${mifaredrv}/mifaredrv.rt" file="${mifaredrv}/mifaredrv.rc" />
+    <brcc file="${mifaredrv}/mifaredrv.rc" output="${mifaredrv}/mifaredrv.res" />
+
+    <dcc basedir="${mifaredrv}" source="mifaredrv.dpr">
+      <exeoutput path="${bin}" />
+      <dcuoutput path="${dcu}" />
+      <debug     value="false" />
+      <console   value="false" />
+      <hugestrings value="true" />
+      <writeableconst value="true" />
+      <align value="false" />
+      <optimize value="false" />
+      <warnings value="true" />
+      <hints value="true" />
+      <overflowchecks value="false" />
+      <rangechecks value="false" />
+      <iochecks value="false" />
+      <build value="true" />
+    </dcc>
+  </target>
+
+  <target name="compile-mifaretst" depends="prepare">
+
+    <delete dir="${dcu}" >
+      <include name="*.dcu" />
+    </delete>
+
+    <echo input="${mifaretst}/mifaretst.rt" file="${mifaretst}/mifaretst.rc" />
+    <brcc file="${mifaretst}/mifaretst.rc" output="${mifaretst}/mifaretst.res" />
+
+    <dcc basedir="${mifaretst}" source="mifaretst.dpr">
+      <exeoutput path="${bin}" />
+      <dcuoutput path="${dcu}" />
+      <debug     value="false" />
+      <console   value="false" />
+      <hugestrings value="true" />
+      <writeableconst value="true" />
+      <align value="false" />
+      <optimize value="false" />
+      <warnings value="true" />
+      <hints value="true" />
+      <overflowchecks value="false" />
+      <rangechecks value="false" />
+      <iochecks value="false" />
+      <build value="true" />
+    </dcc>
+  </target>
+
+  <target name="compile-cfgmgr1C" depends="prepare">
+
+    <delete dir="${dcu}" >
+      <include name="*.dcu" />
+    </delete>
+
+    <dcc basedir="${cfgmgr1C}" source="cfgmgr1C.dpr">
+      <exeoutput path="${bin}" />
+      <dcuoutput path="${dcu}" />
+      <debug     value="false" />
+      <console   value="false" />
+      <hugestrings value="true" />
+      <writeableconst value="true" />
+      <align value="false" />
+      <optimize value="false" />
+      <warnings value="true" />
+      <hints value="true" />
+      <overflowchecks value="false" />
+      <rangechecks value="false" />
+      <iochecks value="false" />
+      <build value="true" />
+    </dcc>
+  </target>
+
+  <target name="sign">
+    <exec executable="SignShtrih.bat">
+      <arg value="${bin}/mifaredrv.dll" />
+    </exec>
+    <exec executable="SignShtrih.bat">
+      <arg value="${bin}/mifaretst.exe" />
+    </exec>
+  </target>
+  
+
+  <target name="compile" depends="prepare,clean,test-mifaredrv,compile-mifaredrv,compile-mifaretst,compile-cfgmgr1C,sign,makesetup,finalclean"/>
+ 
+  <target name="makesetup">
+    <echo input="${setup}/setup_template.iss" file="${setup}/setup.iss"/>
+    <exec basedir="${setup}" executable="iscc">
+      <arg value="/q setup.iss" />
+    </exec>
+    <exec executable="SignShtrih.bat">
+      <arg value="${setup}/setup.exe" />
+    </exec>
+    <move tofile="MifareDrv_${version2}_${build}.exe">
+      <include name="${setup}/setup.exe" />
+    </move>
+    <delete file="${setup}/setup.iss" />
+  </target>
+
+</project>

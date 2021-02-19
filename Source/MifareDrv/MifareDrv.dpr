@@ -1,0 +1,93 @@
+library MifareDrv;
+
+{%ToDo 'MifareDrv.todo'}
+
+uses
+  ComServ,
+  fmuAbout in 'Fmu\fmuAbout.pas' {fmAbout},
+  MifareLib_TLB in 'MifareLib_TLB.pas',
+  oleMain in 'Units\oleMain.pas' {TMifareDrv: CoClass},
+  untDriver in 'Units\untDriver.pas',
+  VersionInfo in 'Units\VersionInfo.pas',
+  oleAddin in 'Units\oleAddin.pas',
+  AddInLib in 'Units\AddinLib.pas',
+  untAddin in 'Units\untAddin.pas',
+  untConst in 'Units\untConst.pas',
+  ole1C in 'Units\ole1C.pas',
+  untCtrl in 'Units\untCtrl.pas',
+  untUtil in 'Units\untUtil.pas',
+  fmuPage in 'Fmu\fmuPage.pas' {fmPage: TPropertyPage},
+  untError in 'Units\untError.pas',
+  Directory in 'Units\Directory.pas',
+  fmuCatalog in 'Fmu\fmuCatalog.pas' {fmCatalog},
+  fmuPassword in 'Fmu\fmuPassword.pas' {fmPassword},
+  CardFirm in 'Units\CardFirm.pas',
+  CardApp in 'Units\CardApp.pas',
+  untTypes in 'Units\untTypes.pas',
+  CardField in 'Units\CardField.pas',
+  CardDriver in 'Units\CardDriver.pas',
+  CustomCard in 'Units\CustomCard.pas',
+  Mifare4K in 'Units\Mifare4K.pas',
+  MifareUltraLight in 'Units\MifareUltraLight.pas',
+  Mifare1K in 'Units\Mifare1K.pas',
+  CardSector in 'Units\CardSector.pas',
+  CardBlock in 'Units\CardBlock.pas',
+  Notifier in 'Units\Notifier.pas',
+  fmuFirms in 'Fmu\fmuFirms.pas' {fmFirms},
+  fmuFirm in 'Fmu\fmuFirm.pas' {fmFirm},
+  fmuApp in 'Fmu\fmuApp.pas' {fmApp},
+  ComPort in 'Units\ComPort.pas',
+  fmuTrailer in 'Fmu\fmuTrailer.pas' {fmTrailer},
+  fmuAccessTrailer in 'Fmu\fmuAccessTrailer.pas' {fmAccessTrailer},
+  fmuAccessData in 'Fmu\fmuAccessData.pas' {fmAccessData},
+  NotifyThread in 'Units\NotifyThread.pas',
+  CardCheckerPort in 'Units\CardCheckerPort.pas',
+  PriceDrv_TLB in 'Units\PriceDrv_TLB.pas',
+  WinSmCrd in 'Units\WinSmCrd.pas',
+  OmnikeyCardReader5422 in 'Units\OmnikeyCardReader5422.pas',
+  Firms in 'Units\Firms.pas',
+  MFRC500Reader in 'Units\MFRC500Reader.pas',
+  MifareTrailer in 'Units\MifareTrailer.pas',
+  Port in 'Units\Port.pas',
+  SCardErr in 'Units\SCardErr.pas',
+  SCardSyn in 'Units\SCardSyn.pas',
+  SCardSynh in 'Units\scardsynh.pas',
+  Sectors in 'Units\Sectors.pas',
+  WinSCard in 'Units\WinSCard.pas',
+  LogFile in 'Units\LogFile.pas',
+  CardReaderInterface in 'Units\CardReaderInterface.pas',
+  SerialPortInterface in 'Units\SerialPortInterface.pas',
+  SerialParams in 'Units\SerialParams.pas',
+  DriverEvent in 'Units\DriverEvent.pas',
+  CardReaderEmulator in 'Units\CardReaderEmulator.pas',
+  MethodSynchronizer in 'Units\MethodSynchronizer.pas',
+  DebugUtils in 'Units\DebugUtils.pas',
+  MifareDevice in 'Units\MifareDevice.pas',
+  ValueBlock in 'Units\ValueBlock.pas',
+  BaseForm in 'Units\BaseForm.pas',
+  SearchPort in 'Units\SearchPort.pas',
+  DeviceSearch in 'Units\DeviceSearch.pas',
+  fmuDeviceSearch in 'Fmu\fmuDeviceSearch.pas' {fmDeviceSearch},
+  fmuParams in 'Fmu\fmuParams.pas' {fmParams},
+  ParamPage in 'Units\ParamPage.pas',
+  fmuBlockParams in 'Fmu\fmuBlockParams.pas' {fmBlockParams},
+  fmuPollParams in 'Fmu\fmuPollParams.pas' {fmPollParams},
+  OmnikeyReader5422 in 'Units\OmnikeyReader5422.pas',
+  fmuLogParams in 'Fmu\fmuLogParams.pas' {fmLogParams},
+  SCardUtil in 'Units\SCardUtil.pas',
+  OmnikeyReader in 'Units\OmnikeyReader.pas',
+  OmnikeyCardReader in 'Units\OmnikeyCardReader.pas';
+
+exports
+  DllGetClassObject,
+  DllCanUnloadNow,
+  DllRegisterServer,
+  DllUnregisterServer;
+
+{$R *.TLB}
+
+{$R *.RES}
+
+begin
+end.
+
