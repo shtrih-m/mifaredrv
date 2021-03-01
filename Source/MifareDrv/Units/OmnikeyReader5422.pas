@@ -138,7 +138,33 @@ const
   iClass3DESKeySize             = 16;
   SecureSessionKeySize          = 16;
 
+  // Synchronus2WBP control byte
+  cbReadMainMemory            = $30;
+  cbUpdateMainMemory          = $38;
+  cbReadProtectionMemory      = $34;
+  cbWriteProtectionMemory     = $3C;
+  cbReadSecurityMemory        = $31;
+  cbUpdateSecurityMemory      = $39;
+  cbCompareVerificationData   = $33;
+
+  // Synchronus3WBP control byte
+  cbWriteProtectBitWithDataComparison       = $30;
+  cbWriteAndEraseWithProtectBit             = $31;
+  cbWriteAndEraseWithoutProtectBit          = $33;
+  cbRead9BitsDataWithProtectBit             = $0C;
+  cbRead8BitsDataWithoutProtectBit          = $0E;
+  cbReadErrorCounter                        = $CE;
+  cbWriteErrorCounter                       = $F2;
+  cbResetErrorCounter                       = $F3;
+  cbVerifyPinByte                           = $CD;
+
 type
+  TOperatingModeFlags = (Iso7816, EMVCo);
+  TVoltageFlag = (None, Low, Mid, High);
+  TVoltageSequenceFlags = array [0..2] of TVoltageFlag;
+
+
+
   { TSmartCardReader }
 
   TOmnikeyReader5422 = class
@@ -266,12 +292,27 @@ type
     procedure WriteIso14443TypeBRxTxBaudRate(Value: Integer);
     function ReadIso15693Enable: Boolean;
     procedure WriteIso15693Enable(Value: Boolean);
-
+    // Contact slot configuration
+    function ReadContactSlotEnable: Boolean;
+    function ReadOperatingMode: TOperatingModeFlags;
+    function ReadVoltageSequence: TVoltageSequenceFlags;
+    procedure WriteContactSlotEnable(Value: Boolean);
+    procedure WriteOperatingMode(Value: TOperatingModeFlags);
+    procedure WriteVoltageSequence(Value: TVoltageSequenceFlags);
+    procedure SetAutomaticSequenceVoltageSequence;
     // Mifare
     procedure LoadKey(keySlot: Byte; const Key: string);
     function MifareAuth(address: Byte; keyType: MifareKeyType; keySlot: Byte): Integer;
-
     procedure TerminateSecureSession;
+    // Contact card
+    procedure ResetErrorCounter;
+    procedure WriteErrorCounter(bitMask: Byte);
+    procedure VerifyFirstPinByte(firstPinByte: Byte);
+    procedure VerifySecondPinByte(secondPinByte: Byte);
+    function ReadErrorCounter: Integer;
+    function Synchronus2WBP(control, address, data: Byte): string;
+    function Synchronus3WBP(control, address, data: Integer): string;
+
 
     property ATR: string read FATR;
     property State: Longint read FState;
@@ -1567,5 +1608,295 @@ procedure TOmnikeyReader5422.TerminateSecureSession;
 begin
   ReaderCommand('FF70076B08A206A004A002800000');
 end;
+
+function TOmnikeyReader5422.ReadContactSlotEnable: Boolean;
+var
+  Answer: string;
+begin
+  Answer := HexToStr(ReaderCommand('FF70076B0AA208A006A304A002850000'));
+  Result := Ord(Answer[5]) <> 0;
+end;
+
+procedure TOmnikeyReader5422.WriteContactSlotEnable(Value: Boolean);
+var
+  Command: string;
+begin
+  Command := Format('FF70076B0BA209A107A305A0038501%.2X00', [BoolToInt[Value]]);
+  ReaderCommand(Command);
+end;
+
+function TOmnikeyReader5422.ReadOperatingMode: TOperatingModeFlags;
+var
+  Answer: string;
+begin
+  Answer := HexToStr(ReaderCommand('FF70076B0AA208A006A304A002830000'));
+  Result := TOperatingModeFlags(Answer[5]);
+end;
+
+procedure TOmnikeyReader5422.WriteOperatingMode(Value: TOperatingModeFlags);
+var
+  Command: string;
+begin
+  Command := Format('FF70076B0BA209A107A305A0038301%.2X00', [Ord(Value)]);
+  ReaderCommand(Command);
+end;
+
+function TOmnikeyReader5422.ReadVoltageSequence: TVoltageSequenceFlags;
+var
+  V: Byte;
+  Answer: string;
+begin
+  Answer := HexToStr(ReaderCommand('FF70076B0AA208A006A304A002820000'));
+  V := Ord(Answer[5]);
+  Result[0] := TVoltageFlag(V and 3);
+  Result[1] := TVoltageFlag((V shr 2) and 3);
+  Result[2] := TVoltageFlag((V shr 4) and 3);
+end;
+
+procedure TOmnikeyReader5422.WriteVoltageSequence(Value: TVoltageSequenceFlags);
+var
+  V: Byte;
+  Answer: string;
+  Command: string;
+begin
+  V := Ord(Value[0]) + (Ord(Value[1]) shl 2) + (Ord(Value[2]) shl 4);
+  Command := Format('FF70076B0BA209A107A305A0038201%.2X00', [Ord(V)]);
+  Answer := ReaderCommand(Command);
+end;
+
+procedure TOmnikeyReader5422.SetAutomaticSequenceVoltageSequence;
+begin
+  ReaderCommand('FF70076B0BA209A107A305A00382010000');
+end;
+
+function TOmnikeyReader5422.Synchronus2WBP(control, address, data: Byte): string;
+var
+  Command: string;
+begin
+  Command := Format('FF70076B07A605A003%.2X%.2X%.2X00', [control, address, data]);
+  Result := ReaderCommand(Command);
+end;
+
+function TOmnikeyReader5422.Synchronus3WBP(control, address, data: Integer): string;
+var
+  Command: string;
+  fullControlByte: Byte;
+begin
+  fullControlByte := control;
+  case control of
+    cbWriteAndEraseWithProtectBit,
+    cbWriteAndEraseWithoutProtectBit,
+    cbWriteProtectBitWithDataComparison,
+    cbRead9BitsDataWithProtectBit,
+    cbRead8BitsDataWithoutProtectBit:
+      fullControlByte := fullControlByte or Byte(((1 shl 9 or 1 shl 8) and address) shr 2);
+
+    cbReadErrorCounter:
+    begin
+      address := $FD;
+      data := $00;
+    end;
+
+    cbVerifyPinByte:
+      if not ((address = $03FE)or(address = $03FF)) then
+      begin
+        Result := '';
+        Exit;
+      end;
+    end;
+    Command := Format('FF70076B07A605A103%.2X%.2X%.2X00', [
+      fullControlByte, address, data]);
+  Result := ReaderCommand(Command);
+end;
+
+procedure TOmnikeyReader5422.WriteErrorCounter(bitMask: Byte);
+begin
+  Synchronus3WBP(cbWriteErrorCounter, $FD, bitMask);
+end;
+
+procedure TOmnikeyReader5422.ResetErrorCounter;
+begin
+  Synchronus3WBP(cbResetErrorCounter, $FD, $FF);
+end;
+
+// 9E0200019000
+
+function TOmnikeyReader5422.ReadErrorCounter: Integer;
+var
+  Answer: string;
+begin
+  Answer := Synchronus3WBP(cbReadErrorCounter, $FD, $00);
+  Result := Ord(HexToStr(Answer)[3]);
+end;
+
+
+procedure TOmnikeyReader5422.VerifyFirstPinByte(firstPinByte: Byte);
+begin
+  Synchronus3WBP(cbVerifyPinByte, $03FE, firstPinByte);
+end;
+
+procedure TOmnikeyReader5422.VerifySecondPinByte(secondPinByte: Byte);
+begin
+  Synchronus3WBP(cbVerifyPinByte, $03FF, secondPinByte);
+end;
+
+(*
+
+    public class SynchronusI2C
+    {
+        public enum MemorySize
+        {
+            _256    = 0x000100,
+            _512    = 0x000200,
+            _1024   = 0x000400,
+            _2048   = 0x000800,
+            _4096   = 0x001000,
+            _8192   = 0x002000,
+            _16384  = 0x004000,
+            _32768  = 0x008000,
+            _65536  = 0x010000,
+            _131072 = 0x020000,
+        };
+        public string GetReadCommandApdu(MemorySize cardMemorySize, int address, byte numberOfBytesToRead)
+        {
+            if ((int) cardMemorySize <= address)
+                throw new ArgumentOutOfRangeException(nameof(address), address, $"Address out of card memory address range, selected card memory size: {(int) cardMemorySize} bytes");
+
+            var i2CCommand = string.Empty;
+            byte numberOfAddressBytes;
+            const byte readFlag = 0x01;
+            byte deviceAddress;
+            byte subAddress1;
+            byte subAddress2;
+
+            switch (cardMemorySize)
+            {
+                case MemorySize._256:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = (byte) (0xA0 | readFlag);
+                    subAddress1 = (byte) (address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._512:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = (byte) (0xA0 | readFlag | ((address & 0x000100) >> 7));
+                    subAddress1 = (byte) (address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._1024:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = (byte) (0xA0 | readFlag | ((address & 0x000300) >> 7));
+                    subAddress1 = (byte) (address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._2048:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = (byte) (0xA0 | readFlag | ((address & 0x000700) >> 7));
+                    subAddress1 = (byte) (address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._4096:
+                case MemorySize._8192:
+                case MemorySize._16384:
+                case MemorySize._32768:
+                case MemorySize._65536:
+                    numberOfAddressBytes = 3;
+                    deviceAddress = (byte) (0xA0 | readFlag);
+                    subAddress1 = (byte) ((address & 0xFF00) >> 8);
+                    subAddress2 = (byte) (address & 0x00FF);
+                    break;
+                case MemorySize._131072:
+                    numberOfAddressBytes = 3;
+                    deviceAddress = (byte) (0xA0 | readFlag | ((address & 0x010000) >> 15));
+                    subAddress1 = (byte) ((address & 0xFF00) >> 8);
+                    subAddress2 = (byte) (address & 0x00FF);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(cardMemorySize), cardMemorySize, null);
+            }
+            i2CCommand = numberOfAddressBytes.ToString("X2") + numberOfBytesToRead.ToString("X2") + deviceAddress.ToString("X2") + subAddress1.ToString("X2") + subAddress2.ToString("X2");
+            var len = i2CCommand.Length / 2;
+            return "FF70076B" + (len + 4).ToString("X2") + "A6" + (len + 2).ToString("X2") + "A2" + len.ToString("X2") + i2CCommand + "00";
+        }
+        public string GetWriteCommandApdu(MemorySize cardMemorySize, int address, byte numberOfBytesToWrite, string dataOctetString)
+        {
+            if ((int)cardMemorySize <= address)
+                throw new ArgumentOutOfRangeException(nameof(address), address, $"Address out of card memory address range, selected card memory size: {(int)cardMemorySize} bytes");
+
+            var i2CCommand = string.Empty;
+            byte numberOfAddressBytes;
+            byte deviceAddress;
+            byte subAddress1;
+            byte subAddress2;
+
+            switch (cardMemorySize)
+            {
+                case MemorySize._256:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = 0xA0;
+                    subAddress1 = (byte)(address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._512:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = (byte)(0xA0 | ((address & 0x000100) >> 7));
+                    subAddress1 = (byte)(address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._1024:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = (byte)(0xA0 | ((address & 0x000300) >> 7));
+                    subAddress1 = (byte)(address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._2048:
+                    numberOfAddressBytes = 2;
+                    deviceAddress = (byte)(0xA0 | ((address & 0x000700) >> 7));
+                    subAddress1 = (byte)(address & 0x00FF);
+                    subAddress2 = 0x00;
+                    break;
+                case MemorySize._4096:
+                case MemorySize._8192:
+                case MemorySize._16384:
+                case MemorySize._32768:
+                case MemorySize._65536:
+                    numberOfAddressBytes = 3;
+                    deviceAddress = 0xA0;
+                    subAddress1 = (byte)((address & 0xFF00) >> 8);
+                    subAddress2 = (byte)(address & 0x00FF);
+                    break;
+                case MemorySize._131072:
+                    numberOfAddressBytes = 3;
+                    deviceAddress = (byte)(0xA0 | ((address & 0x010000) >> 15));
+                    subAddress1 = (byte)((address & 0xFF00) >> 8);
+                    subAddress2 = (byte)(address & 0x00FF);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(cardMemorySize), cardMemorySize, null);
+            }
+
+            if (dataOctetString.Length % 2 != 0)
+                throw new ArgumentOutOfRangeException(nameof(dataOctetString), dataOctetString, "String length not even.");
+
+            for (int i = 0; i < dataOctetString.Length / 2; i++)
+            {
+                byte data;
+                if (!byte.TryParse(dataOctetString.Substring(2 * i, 2), NumberStyles.HexNumber, CultureInfo.CurrentCulture, out data))
+                    throw new ArgumentOutOfRangeException(nameof(dataOctetString), dataOctetString, "String can contain only hex numbers.");
+            }
+            
+            i2CCommand = numberOfAddressBytes.ToString("X2") + numberOfBytesToWrite.ToString("X2") + deviceAddress.ToString("X2") + subAddress1.ToString("X2") + subAddress2.ToString("X2") + dataOctetString;
+            var len = i2CCommand.Length / 2;
+            return "FF70076B" + (len + 4).ToString("X2") + "A6" + (len + 2).ToString("X2") + "A2" + len.ToString("X2") + i2CCommand + "00";
+        }
+        public string GetApdu(string i2CCommand)
+        {
+            i2CCommand = i2CCommand.Replace(" ", "").Replace("-", "");
+            var len = i2CCommand.Length / 2;
+            return "FF70076B" + (len + 4).ToString("X2") + "A6" + (len + 2).ToString("X2") + "A2" + len.ToString("X2") +
+                   i2CCommand + "00";
+        }
+
+*)
 
 end.

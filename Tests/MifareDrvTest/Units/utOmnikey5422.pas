@@ -19,13 +19,15 @@ type
   protected
     procedure Setup; override;
     procedure TearDown; override;
+  published
     procedure TestReaderCapabilities;
     procedure TestUserEEPROM;
     procedure TestConfiguration;
     procedure TestContactlessSlot;
+    procedure TestContactSlot;
     procedure TestMifareClassic;
     procedure TestMifareUltralight;
-  published
+    procedure TestConactCard;
   end;
 
 implementation
@@ -269,6 +271,45 @@ begin
 end;
 
 // 6990
+
+procedure TOmnikey5422Test.TestContactSlot;
+var
+  Flags: TVoltageSequenceFlags;
+begin
+  // ContactSlotEnable
+  CheckEquals(True, Reader.ReadContactSlotEnable, 'Reader.ReadContactSlotEnable');
+  Reader.WriteContactSlotEnable(False);
+  CheckEquals(False, Reader.ReadContactSlotEnable, 'Reader.ReadContactSlotEnable');
+  Reader.WriteContactSlotEnable(True);
+  CheckEquals(True, Reader.ReadContactSlotEnable, 'Reader.ReadContactSlotEnable');
+  // OperatingMode
+  CheckEquals(Ord(Iso7816), Ord(Reader.ReadOperatingMode), 'Reader.ReadOperatingMode');
+  Reader.WriteOperatingMode(EMVCo);
+  CheckEquals(Ord(EMVCo), Ord(Reader.ReadOperatingMode), 'Reader.ReadOperatingMode');
+  Reader.WriteOperatingMode(Iso7816);
+  CheckEquals(Ord(Iso7816), Ord(Reader.ReadOperatingMode), 'Reader.ReadOperatingMode');
+  // VoltageSequence
+  Reader.SetAutomaticSequenceVoltageSequence;
+  Flags := Reader.ReadVoltageSequence;
+  CheckEquals(0, Ord(Flags[0]), 'ReadVoltageSequence[0]');
+  CheckEquals(0, Ord(Flags[1]), 'ReadVoltageSequence[1]');
+  CheckEquals(0, Ord(Flags[2]), 'ReadVoltageSequence[2]');
+
+  Flags[0] := TVoltageFlag(1);
+  Flags[1] := TVoltageFlag(2);
+  Flags[2] := TVoltageFlag(3);
+  Reader.WriteVoltageSequence(Flags);
+  Flags := Reader.ReadVoltageSequence;
+  CheckEquals(1, Ord(Flags[0]), 'ReadVoltageSequence[0]');
+  CheckEquals(2, Ord(Flags[1]), 'ReadVoltageSequence[1]');
+  CheckEquals(3, Ord(Flags[2]), 'ReadVoltageSequence[2]');
+end;
+
+procedure TOmnikey5422Test.TestConactCard;
+begin
+  CheckEquals(0, Reader.ReadErrorCounter, 'Reader.ReadErrorCounter');
+
+end;
 
 initialization
   RegisterTest('', TOmnikey5422Test.Suite);
