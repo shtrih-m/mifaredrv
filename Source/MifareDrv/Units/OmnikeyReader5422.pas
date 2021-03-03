@@ -5,6 +5,8 @@ interface
 uses
   // VCL
   Windows, Classes, SysUtils, StrUtils,
+  // 3'd
+  DCPrijndael,
   // This
   SCardUtil,
   WinSCard, WinSmCrd, SCardErr, LogFile, untError, untUtil, MifareLib_TLB;
@@ -1738,6 +1740,20 @@ end;
 procedure TOmnikeyReader5422.VerifySecondPinByte(secondPinByte: Byte);
 begin
   Synchronus3WBP(cbVerifyPinByte, $03FF, secondPinByte);
+end;
+
+function AesEncrypt(key, iv, data: string): string;
+var
+  cipher: TDCP_rijndael;
+begin
+  SetLength(Result, Length(data));
+  cipher := TDCP_rijndael.Create(nil);
+  try
+    cipher.Init(key[1], Length(key), @iv[1]);
+    cipher.EncryptECB(data[1], Result[1]);
+  finally
+    cipher.Free;
+  end;
 end;
 
 (*

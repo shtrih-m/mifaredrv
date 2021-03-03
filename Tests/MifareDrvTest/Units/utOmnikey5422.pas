@@ -5,6 +5,8 @@ interface
 uses
   // VCL
   Windows, SysUtils, Classes, Forms, Registry,
+  // 3'd
+  DCPrijndael,
   // DUnit
   TestFramework,
   // This
@@ -19,7 +21,6 @@ type
   protected
     procedure Setup; override;
     procedure TearDown; override;
-  published
     procedure TestReaderCapabilities;
     procedure TestUserEEPROM;
     procedure TestConfiguration;
@@ -28,6 +29,8 @@ type
     procedure TestMifareClassic;
     procedure TestMifareUltralight;
     procedure TestConactCard;
+  published
+    procedure TestAesEncrypt;
   end;
 
 implementation
@@ -309,6 +312,26 @@ procedure TOmnikey5422Test.TestConactCard;
 begin
   CheckEquals(0, Reader.ReadErrorCounter, 'Reader.ReadErrorCounter');
 
+end;
+
+procedure TOmnikey5422Test.TestAesEncrypt;
+var
+  cipher: TDCP_rijndael;
+  key, iv, data, dataout: string;
+begin
+  key := StringOfChar(#$34, 16);
+  iv := StringOfChar(#0, 16);
+  data := StringOfChar(#0, 16);
+  dataout := StringOfChar(#0, 16);
+
+  cipher := TDCP_rijndael.Create(nil);
+  try
+    cipher.Init(key[1], Length(key), @iv[1]);
+    cipher.EncryptECB(data[1], dataout[1]);
+    CheckEquals('A9DC4943088927D2CF85D8EA08691CB6', StrToHex(dataout));
+  finally
+    cipher.Free;
+  end;
 end;
 
 initialization
