@@ -41,9 +41,10 @@ uses
   fmuUltraLight in 'Fmu\fmuUltraLight.pas' {fmUltraLight},
   fmuData in 'Fmu\fmuData.pas' {fmData},
   fmuUltraLightCData in 'Fmu\fmuUltraLightCData.pas' {fmUltraLightCData},
-  fmuMifarePlusAuth in 'Fmu\fmuMifarePlusAuth.pas' {fmMifarePlusAuth},
+  fmuMifarePlusSelectSlot in 'Fmu\fmuMifarePlusSelectSlot.pas' {fmMifarePlusSelectSlot},
   MifareTypes in 'Units\MifareTypes.pas',
-  fmuMifarePlusValue in 'Fmu\fmuMifarePlusValue.pas' {fmMifarePlusValue};
+  fmuMifarePlusValue in 'Fmu\fmuMifarePlusValue.pas' {fmMifarePlusValue},
+  fmuMifarePlusAuth in 'Fmu\fmuMifarePlusAuth.pas' {fmMifarePlusAuth};
 
 {$R *.RES}
 

@@ -127,6 +127,7 @@ type
     procedure MifarePlusMultiblockWriteSL2(const P: TMifarePlusMultiblockWriteSL2);
     procedure MifarePlusAuthSL2Crypto1(const P: TMifarePlusAuthSL2Crypto1);
     procedure WriteEncryptedData(const P: TWriteEncryptedDataRec);
+    procedure MifarePlusSelectSAMSlot(const P: TSelectSAM; var R: TSelectSAMAnswer);
 
 
     property RxData: string read GetRxData;
@@ -690,6 +691,12 @@ end;
 function TCardReaderEmulator.GetCardName: string;
 begin
   Result := 'Неизвестная карта';
+end;
+
+procedure TCardReaderEmulator.MifarePlusSelectSAMSlot(const P: TSelectSAM;
+  var R: TSelectSAMAnswer);
+begin
+
 end;
 
 end.

@@ -125,7 +125,6 @@ type
     function MifarePlusMultiblockReadSL2(const P: TMifarePlusMultiblockReadSL2): string;
     procedure MifarePlusMultiblockWriteSL2(const P: TMifarePlusMultiblockWriteSL2);
     function MifarePlusRead(const P: TMifarePlusReadValue): string;
-
     procedure MifarePlusWrite(const P: TMifarePlusWrite);
     function MifarePlusReadValue(const P: TMifarePlusReadValue): Integer;
     procedure MifarePlusResetAuthentication;
@@ -133,6 +132,8 @@ type
     procedure MifarePlusTransfer(const P: TMifarePlusTransfer);
     procedure MifarePlusWriteValue(const P: TMifarePlusWriteValue);
     procedure MifarePlusAuthSL2Crypto1(const P: TMifarePlusAuthSL2Crypto1);
+    procedure MifarePlusSelectSAMSlot(const P: TSelectSAM;
+      var R: TSelectSAMAnswer);
 
     procedure EnableCardAccept;
     procedure DisableCardAccept;
@@ -1771,5 +1772,58 @@ function TMFRC500Reader.GetCardName: string;
 begin
   Result := FCardName;
 end;
+
+(*
+Команда 27h "Переключение слота SAM AV2 модуля"
+Производит переключение слота SAM модуля.
+Если SAM AV2 нет в слоте или нет такого слота (номер больше 4),
+то переключение не произойдёт. Есть поддержка ESMART.
+
+Сообщение к считывателю
+Длина сообщения: 2 байта или 3 байта.
+№	Описание	Размер, байт
+1	Код команды: 27h	1
+2	Номер слота. Значение от 0 до 4.
+Можно использовать значение выше 4, тогда переключение не произойдёт. Но будет возвращён текущий слот.
+При отправке значения слота 27h не будет возвращена ошибка и будет возвращён текущий слот.	1
+3	Опциональный байт.
+При значении равном 0x01 происходит переключение на компоненты работы без SAM модуля.	1
+
+Ответ от считывателя
+Длина сообщения: 7 байт.
+№	Описание	Размер, байт
+1	Код ошибки	1
+2	Текущий слот. Значение от 0 до 4. Либо 0xFF если работа без SAM модуля. См. опциональный параметр команды.
+Если нет ошибки, то вернёт номер слота, который был задан в команде.
+Если в слоте нет SAM AV2 модуля или нет такого слота, то вернёт текущий слот.	1
+3	Статус слота 0. Значение 0 - нет SAM AV2 модуля в слоте или не удалось авторизоваться, 255 - есть SAM AV2 в слоте, 1 - не известный SAM модуль в слоте, 2 - ESMART.	1
+4	Статус слота 1. Значение 0 - нет SAM AV2 модуля в слоте или не удалось авторизоваться, 255 - есть SAM AV2 в слоте, 1 - не известный SAM модуль в слоте, 2 - ESMART.	1
+5	Статус слота 2. Значение 0 - нет SAM AV2 модуля в слоте или не удалось авторизоваться, 255 - есть SAM AV2 в слоте, 1 - не известный SAM модуль в слоте, 2 - ESMART.	1
+6	Статус слота 3. Значение 0 - нет SAM AV2 модуля в слоте или не удалось авторизоваться, 255 - есть SAM AV2 в слоте, 1 - не известный SAM модуль в слоте, 2 - ESMART.	1
+7	Статус слота 4. Значение 0 - нет SAM AV2 модуля в слоте или не удалось авторизоваться, 255 - есть SAM AV2 в слоте, 1 - не известный SAM модуль в слоте, 2 - ESMART. Этот слот обычно отсутствует.	1
+
+*)
+
+procedure TMFRC500Reader.MifarePlusSelectSAMSlot (const P: TSelectSAM;
+  var R: TSelectSAMAnswer);
+var
+  Answer: string;
+  Command: string;
+begin
+  Command := #$27 + Chr(P.SlotNumber);
+  if P.UseOptional then
+    Command := Command + Chr(P.Optional);
+  Answer := SendCommand(Command);
+  if Length(Answer) >= 6 then
+  begin
+    R.SlotNumber := Ord(Answer[1]);
+    R.SlotStatus0 := Ord(Answer[2]);
+    R.SlotStatus1 := Ord(Answer[3]);
+    R.SlotStatus2 := Ord(Answer[4]);
+    R.SlotStatus3 := Ord(Answer[5]);
+    R.SlotStatus4 := Ord(Answer[6]);
+  end;
+end;
+
 
 end.

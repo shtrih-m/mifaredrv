@@ -133,6 +133,7 @@ type
     procedure MifarePlusMultiblockWriteSL2(const P: TMifarePlusMultiblockWriteSL2);
     procedure MifarePlusAuthSL2Crypto1(const P: TMifarePlusAuthSL2Crypto1);
     procedure WriteEncryptedData(const P: TWriteEncryptedDataRec);
+    procedure MifarePlusSelectSAMSlot(const P: TSelectSAM; var R: TSelectSAMAnswer);
   end;
 
 implementation
@@ -847,6 +848,12 @@ end;
 
 procedure TOmnikeyCardReader.WriteEncryptedData(
   const P: TWriteEncryptedDataRec);
+begin
+
+end;
+
+procedure TOmnikeyCardReader.MifarePlusSelectSAMSlot(const P: TSelectSAM;
+  var R: TSelectSAMAnswer);
 begin
 
 end;

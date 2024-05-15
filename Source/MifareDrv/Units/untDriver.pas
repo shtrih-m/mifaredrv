@@ -240,6 +240,14 @@ type
     EncryptionEnabled: Boolean; // Настройка обмена, шифрование
     AnswerSignature: Boolean;   // Настройка обмена, подпись ответа
     CommandSignature: Boolean;  // Настройка обмена, подпись команды
+    SlotNumber: Integer;
+    OptionalValue: Integer;
+    UseOptional: Boolean;
+    SlotStatus0: Integer;
+    SlotStatus1: Integer;
+    SlotStatus2: Integer;
+    SlotStatus3: Integer;
+    SlotStatus4: Integer;
 
     constructor Create;
     destructor Destroy; override;
@@ -380,6 +388,8 @@ type
     function MifarePlusMultiblockWriteSL2: Integer;
     function MifarePlusAuthSL2Crypto1: Integer;
     function WriteEncryptedData: Integer;
+    function MifarePlusSelectSAMSlot: Integer;
+
 
     property ID: Integer read FID;
     property DriverID: Integer read FID;
@@ -3274,6 +3284,29 @@ end;
 procedure TDriver.SetPollActivateMethod(const Value: TPollActivateMethod);
 begin
   FParams.PollActivateMethod := Value;
+end;
+
+function TDriver.MifarePlusSelectSAMSlot: Integer;
+var
+  P: TSelectSAM;
+  R: TSelectSAMAnswer;
+begin
+  try
+    P.SlotNumber := SlotNumber;
+    P.Optional := OptionalValue;
+    P.UseOptional := UseOptional;
+    CardReader.MifarePlusSelectSAMSlot(P, R);
+    SlotNumber := R.SlotNumber;
+    SlotStatus0 := R.SlotStatus0;
+    SlotStatus1 := R.SlotStatus1;
+    SlotStatus2 := R.SlotStatus2;
+    SlotStatus3 := R.SlotStatus3;
+    SlotStatus4 := R.SlotStatus4;
+    Result := ClearResult;
+  except
+    on E: Exception do
+      Result := HandleException(E);
+  end;
 end;
 
 end.

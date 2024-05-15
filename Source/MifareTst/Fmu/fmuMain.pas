@@ -13,7 +13,7 @@ uses
   fmuUltraLight, fmuUltraLightC, fmuMikleSoft, fmuSAMVersion, fmuSAMAuth,
   fmuSAMCommands, fmuMifarePlusParams, fmuMifarePlusPerso, fmuMifarePlusAuth,
   fmuMifarePlusValue, fmuMifarePlusData, fmuUltraLightCData, fmuDispenser,
-  fmuMifarePlusAuthSL2, fmuCardEmission;
+  fmuMifarePlusAuthSL2, fmuCardEmission, fmuMifarePlusSelectSlot;
 
 type
   { TfmMain }
@@ -137,6 +137,7 @@ begin
   AddPage(TfmMifarePlusAuthSL2);
   AddPage(TfmMifarePlusValue);
   AddPage(TfmMifarePlusData);
+  AddPage(TfmMifarePlusSelectSlot);
   AddPage(TfmDispenser);
   AddPage(TfmCardEmission);
 end;

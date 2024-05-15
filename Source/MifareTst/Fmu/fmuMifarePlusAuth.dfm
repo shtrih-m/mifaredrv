@@ -1,6 +1,6 @@
 object fmMifarePlusAuth: TfmMifarePlusAuth
-  Left = 435
-  Top = 173
+  Left = 942
+  Top = 301
   BorderStyle = bsSingle
   Caption = 'MIFARE Plus '#1072#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103
   ClientHeight = 444

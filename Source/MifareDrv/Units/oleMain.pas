@@ -14,7 +14,7 @@ type
   { TMifareDrv }
 
   TMifareDrv = class(TActiveXControl, IMifareDrv, IMifareDrv1,
-    IMIfareDrv2, IMIfareDrv3)
+    IMIfareDrv2, IMIfareDrv3, IMIfareDrv4)
   private
     FID: Integer;
     FDriver: TCardDriver;
@@ -418,6 +418,19 @@ type
     function MifarePlusMultiblockWriteSL2: Integer; safecall;
     function MifarePlusAuthSL2Crypto1: Integer; safecall;
     function WriteEncryptedData: Integer; safecall;
+    // IMifareDrv4
+    function Get_SlotNumber: Integer; safecall;
+    procedure Set_SlotNumber(Value: Integer); safecall;
+    function Get_OptionalValue: Integer; safecall;
+    procedure Set_OptionalValue(Value: Integer); safecall;
+    function Get_UseOptional: WordBool; safecall;
+    procedure Set_UseOptional(Value: WordBool); safecall;
+    function MifarePlusSelectSAMSlot: Integer; safecall;
+    function Get_SlotStatus0: Integer; safecall;
+    function Get_SlotStatus1: Integer; safecall;
+    function Get_SlotStatus2: Integer; safecall;
+    function Get_SlotStatus3: Integer; safecall;
+    function Get_SlotStatus4: Integer; safecall;
 
     function Get_PollActivateMethod: TPollActivateMethod; safecall;
     procedure Set_PollActivateMethod(Value: TPollActivateMethod); safecall;
@@ -3238,6 +3251,90 @@ begin
   LogMethodName('Set_PollActivateMethod');
   Driver.PollActivateMethod := Value;
   LogMethodValue('Set_PollActivateMethod', Value);
+end;
+
+function TMifareDrv.Get_SlotNumber: Integer;
+begin
+  LogMethodName('Get_SlotNumber');
+  Result := Driver.SlotNumber;
+  LogMethodValue('Get_SlotNumber', Result);
+end;
+
+function TMifareDrv.Get_SlotStatus0: Integer;
+begin
+  LogMethodName('Get_SlotStatus0');
+  Result := Driver.SlotStatus0;
+  LogMethodValue('Get_SlotStatus0', Result);
+end;
+
+function TMifareDrv.Get_SlotStatus1: Integer;
+begin
+  LogMethodName('Get_SlotStatus1');
+  Result := Driver.SlotStatus1;
+  LogMethodValue('Get_SlotStatus1', Result);
+end;
+
+function TMifareDrv.Get_SlotStatus2: Integer;
+begin
+  LogMethodName('Get_SlotStatus2');
+  Result := Driver.SlotStatus2;
+  LogMethodValue('Get_SlotStatus2', Result);
+end;
+
+function TMifareDrv.Get_SlotStatus3: Integer;
+begin
+  LogMethodName('Get_SlotStatus3');
+  Result := Driver.SlotStatus3;
+  LogMethodValue('Get_SlotStatus3', Result);
+end;
+
+function TMifareDrv.Get_SlotStatus4: Integer;
+begin
+  LogMethodName('Get_SlotStatus4');
+  Result := Driver.SlotStatus4;
+  LogMethodValue('Get_SlotStatus4', Result);
+end;
+
+function TMifareDrv.Get_UseOptional: WordBool;
+begin
+  LogMethodName('Get_UseOptional');
+  Result := Driver.UseOptional;
+  LogMethodValue('Get_UseOptional', Result);
+end;
+
+function TMifareDrv.MifarePlusSelectSAMSlot: Integer;
+begin
+  LogMethodName('MifarePlusSelectSAMSlot');
+  Result := Driver.MifarePlusSelectSAMSlot;
+  LogMethodValue('MifarePlusSelectSAMSlot', Result);
+end;
+
+function TMifareDrv.Get_OptionalValue: Integer;
+begin
+  LogMethodName('Get_OptionalValue');
+  Result := Driver.OptionalValue;
+  LogMethodValue('Get_OptionalValue', Result);
+end;
+
+procedure TMifareDrv.Set_SlotNumber(Value: Integer);
+begin
+  LogMethodName('Set_SlotNumber');
+  Driver.SlotNumber := Value;
+  LogMethodValue('Set_SlotNumber', Value);
+end;
+
+procedure TMifareDrv.Set_UseOptional(Value: WordBool);
+begin
+  LogMethodName('Set_UseOptional');
+  Driver.UseOptional := Value;
+  LogMethodValue('Set_UseOptional', Value);
+end;
+
+procedure TMifareDrv.Set_OptionalValue(Value: Integer);
+begin
+  LogMethodName('Set_OptionalValue');
+  Driver.OptionalValue := Value;
+  LogMethodValue('Set_OptionalValue', Value);
 end;
 
 end.

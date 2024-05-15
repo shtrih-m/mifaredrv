@@ -113,5 +113,7 @@ initialization
   TActiveXControlFactory.Create(ComServer, Tole1C, TAxCtrl, CLASS_MifareDrv2,
     1, '', OLEMISC_INVISIBLEATRUNTIME, tmApartment);
 
+  TActiveXControlFactory.Create(ComServer, Tole1C, TAxCtrl, CLASS_MifareDrv4,
+    1, '', OLEMISC_INVISIBLEATRUNTIME, tmApartment);
 
 end.

@@ -12,10 +12,10 @@ unit MifareLib_TLB;
 // ************************************************************************ //
 
 // PASTLWTR : 1.2
-// File generated on 19.02.2021 11:43:31 from Type Library described below.
+// File generated on 15.05.2024 9:41:33 from Type Library described below.
 
 // ************************************************************************  //
-// Type Lib: D:\projects\MifareDrv_80\Source\MifareDrv\MifareDrv.tlb (1)
+// Type Lib: D:\projects\MifareDrv\Source\MifareDrv\MifareDrv.tlb (1)
 // LIBID: {11C2E197-6F27-42B2-A78C-40D7D0446092}
 // LCID: 0
 // Helpfile: 
@@ -52,7 +52,9 @@ const
   IID_IMIfareDrv2: TGUID = '{244EC6AA-F110-4835-BB5C-013D50E71518}';
   IID_IMifareDrv3: TGUID = '{EE43D29A-EE86-4604-80E6-742A9E1B6790}';
   CLASS_MifareDrv2: TGUID = '{1427F57D-CDF3-46B3-BC10-3C9D1C029F7E}';
+  IID_IMifareDrv4: TGUID = '{04F0144D-C7DB-4BC6-8B6A-CF8FF7E73BCC}';
   CLASS_MifareDrv: TGUID = '{450E3DC0-5370-4007-BD5F-90827EC2C2D6}';
+  CLASS_MifareDrv4: TGUID = '{DD055FE8-636A-4666-8D75-7CF115D5A159}';
 
 // *********************************************************************//
 // Declaration of Enumerations defined in Type Library                    
@@ -231,13 +233,16 @@ type
   IMIfareDrv2Disp = dispinterface;
   IMifareDrv3 = interface;
   IMifareDrv3Disp = dispinterface;
+  IMifareDrv4 = interface;
+  IMifareDrv4Disp = dispinterface;
 
 // *********************************************************************//
 // Declaration of CoClasses defined in Type Library                       
 // (NOTE: Here we map each CoClass to its Default Interface)              
 // *********************************************************************//
   MifareDrv2 = IMifareDrv3;
-  MifareDrv = IMifareDrv3;
+  MifareDrv = IMifareDrv4;
+  MifareDrv4 = IMifareDrv4;
 
 
 // *********************************************************************//
@@ -1687,6 +1692,347 @@ type
     property Version: WideString readonly dispid 152;
   end;
 
+// *********************************************************************//
+// Interface: IMifareDrv4
+// Flags:     (4416) Dual OleAutomation Dispatchable
+// GUID:      {04F0144D-C7DB-4BC6-8B6A-CF8FF7E73BCC}
+// *********************************************************************//
+  IMifareDrv4 = interface(IMifareDrv3)
+    ['{04F0144D-C7DB-4BC6-8B6A-CF8FF7E73BCC}']
+    function Get_SlotNumber: Integer; safecall;
+    procedure Set_SlotNumber(Value: Integer); safecall;
+    function Get_UseOptional: WordBool; safecall;
+    procedure Set_UseOptional(Value: WordBool); safecall;
+    function Get_OptionalValue: Integer; safecall;
+    procedure Set_OptionalValue(Value: Integer); safecall;
+    function MifarePlusSelectSAMSlot: Integer; safecall;
+    function Get_SlotStatus0: Integer; safecall;
+    function Get_SlotStatus1: Integer; safecall;
+    function Get_SlotStatus2: Integer; safecall;
+    function Get_SlotStatus3: Integer; safecall;
+    function Get_SlotStatus4: Integer; safecall;
+    property SlotNumber: Integer read Get_SlotNumber write Set_SlotNumber;
+    property UseOptional: WordBool read Get_UseOptional write Set_UseOptional;
+    property OptionalValue: Integer read Get_OptionalValue write Set_OptionalValue;
+    property SlotStatus0: Integer read Get_SlotStatus0;
+    property SlotStatus1: Integer read Get_SlotStatus1;
+    property SlotStatus2: Integer read Get_SlotStatus2;
+    property SlotStatus3: Integer read Get_SlotStatus3;
+    property SlotStatus4: Integer read Get_SlotStatus4;
+  end;
+
+// *********************************************************************//
+// DispIntf:  IMifareDrv4Disp
+// Flags:     (4416) Dual OleAutomation Dispatchable
+// GUID:      {04F0144D-C7DB-4BC6-8B6A-CF8FF7E73BCC}
+// *********************************************************************//
+  IMifareDrv4Disp = dispinterface
+    ['{04F0144D-C7DB-4BC6-8B6A-CF8FF7E73BCC}']
+    property SlotNumber: Integer dispid 614;
+    property UseOptional: WordBool dispid 615;
+    property OptionalValue: Integer dispid 616;
+    function MifarePlusSelectSAMSlot: Integer; dispid 617;
+    property SlotStatus0: Integer readonly dispid 618;
+    property SlotStatus1: Integer readonly dispid 619;
+    property SlotStatus2: Integer readonly dispid 620;
+    property SlotStatus3: Integer readonly dispid 621;
+    property SlotStatus4: Integer readonly dispid 622;
+    property EventID: Integer dispid 501;
+    property EventDriverID: Integer readonly dispid 502;
+    property EventType: Integer readonly dispid 503;
+    property EventPortNumber: Integer readonly dispid 504;
+    property EventErrorCode: Integer readonly dispid 505;
+    property EventErrorText: WideString readonly dispid 506;
+    property EventCardUIDHex: WideString readonly dispid 507;
+    function FindEvent: Integer; dispid 508;
+    function DeleteEvent: Integer; dispid 509;
+    property EventsEnabled: WordBool dispid 510;
+    function ClearEvents: Integer; dispid 512;
+    property EventCount: Integer readonly dispid 513;
+    property DriverID: Integer readonly dispid 511;
+    function LockReader: Integer; dispid 514;
+    function UnlockReader: Integer; dispid 515;
+    property YellowLED: WordBool dispid 516;
+    function SAM_GetVersion: Integer; dispid 517;
+    property SAMVersion: {??TSAMVersion}OleVariant readonly dispid 518;
+    function SAM_WriteKey: Integer; dispid 519;
+    property KeyPosition: Integer dispid 520;
+    property KeyVersion: Integer dispid 521;
+    function SAM_AuthKey: Integer; dispid 522;
+    property LogFilePath: WideString dispid 523;
+    property ParamsRegKey: WideString dispid 524;
+    function SAM_WriteHostAuthKey: Integer; dispid 525;
+    function SAM_GetKeyEntry: Integer; dispid 526;
+    function ReadFullSerialNumber: Integer; dispid 527;
+    function SAM_SetProtection: Integer; dispid 528;
+    function SAM_SetProtectionSN: Integer; dispid 529;
+    property KeyEntryNumber: Integer dispid 530;
+    property KeyVersion0: Integer readonly dispid 531;
+    property KeyVersion1: Integer readonly dispid 532;
+    property KeyVersion2: Integer readonly dispid 533;
+    property SerialNumber: WideString dispid 534;
+    property SerialNumberHex: WideString dispid 535;
+    property KeyTypeText: WideString readonly dispid 536;
+    function WriteConnectionParams: Integer; dispid 537;
+    property ErrorOnCorruptedValueBlock: WordBool dispid 538;
+    property IsValueBlockCorrupted: WordBool readonly dispid 539;
+    function UltralightRead: Integer; dispid 540;
+    function UltralightWrite: Integer; dispid 541;
+    function UltralightCompatWrite: Integer; dispid 542;
+    function UltralightWriteKey: Integer; dispid 543;
+    function UltralightAuth: Integer; dispid 544;
+    function MifarePlusWritePerso: Integer; dispid 545;
+    function MifarePlusWriteParameters: Integer; dispid 546;
+    function MifarePlusCommitPerso: Integer; dispid 547;
+    property ReceiveDivisor: Integer dispid 548;
+    property SendDivisor: Integer dispid 549;
+    function MifarePlusAuthSL1: Integer; dispid 550;
+    function MifarePlusAuthSL3: Integer; dispid 551;
+    function MifarePlusIncrement: Integer; dispid 552;
+    function MifarePlusDecrement: Integer; dispid 553;
+    function MifarePlusIncrementTransfer: Integer; dispid 554;
+    function MifarePlusDecrementTransfer: Integer; dispid 555;
+    function MifarePlusRead: Integer; dispid 556;
+    function MifarePlusRestore: Integer; dispid 557;
+    function MifarePlusTransfer: Integer; dispid 558;
+    function MifarePlusReadValue: Integer; dispid 559;
+    function MifarePlusWriteValue: Integer; dispid 560;
+    function MifarePlusMultiblockRead: Integer; dispid 561;
+    function MifarePlusMultiblockWrite: Integer; dispid 562;
+    function MifarePlusResetAuthentication: Integer; dispid 563;
+    property AuthType: Integer dispid 564;
+    property BlockCount: Integer dispid 565;
+    function MifarePlusWrite: Integer; dispid 566;
+    property NewBaudRate: Integer dispid 567;
+    function ClearResult: Integer; dispid 568;
+    property SAMHWVendorID: Integer readonly dispid 569;
+    property SAMHWVendorName: WideString readonly dispid 570;
+    property SAMHWType: Integer readonly dispid 571;
+    property SAMHWSubType: Integer readonly dispid 572;
+    property SAMHWMajorVersion: Integer readonly dispid 573;
+    property SAMHWMinorVersion: Integer readonly dispid 574;
+    property SAMHWProtocol: Integer readonly dispid 575;
+    property SAMHWStorageSize: Integer readonly dispid 576;
+    property SAMHWStorageSizeCode: Integer readonly dispid 577;
+    property SAMSWVendorID: Integer readonly dispid 578;
+    property SAMSWVendorName: WideString readonly dispid 579;
+    property SAMSWType: Integer readonly dispid 580;
+    property SAMSWSubType: Integer readonly dispid 581;
+    property SAMSWMajorVersion: Integer readonly dispid 582;
+    property SAMSWMinorVersion: Integer readonly dispid 583;
+    property SAMSWProtocol: Integer readonly dispid 584;
+    property SAMSWStorageSize: Integer readonly dispid 585;
+    property SAMSWStorageSizeCode: Integer readonly dispid 586;
+    property SAMMode: Integer readonly dispid 587;
+    property SAMModeName: WideString readonly dispid 588;
+    property SAMMDUID: Integer readonly dispid 589;
+    property SAMMDUIDHex: WideString readonly dispid 590;
+    property SAMMDBatchNo: Integer readonly dispid 591;
+    property SAMMDProductionDay: Integer readonly dispid 592;
+    property SAMMDProductionMonth: Integer readonly dispid 593;
+    property SAMMDProductionYear: Integer readonly dispid 594;
+    property SAMMDGlobalCryptoSettings: Integer readonly dispid 595;
+    property SAMMDUIDStr: WideString readonly dispid 596;
+    function EnableCardAccept: Integer; dispid 597;
+    function DisableCardAccept: Integer; dispid 598;
+    function ReadStatus: Integer; dispid 599;
+    function IssueCard: Integer; dispid 600;
+    function HoldCard: Integer; dispid 601;
+    function ReadLastAnswer: Integer; dispid 602;
+    property Protocol: Integer dispid 603;
+    function MifarePlusAuthSL2: Integer; dispid 604;
+    function SAMAV2WriteKey: Integer; dispid 605;
+    property EncryptionEnabled: WordBool dispid 606;
+    property AnswerSignature: WordBool dispid 607;
+    property CommandSignature: WordBool dispid 608;
+    function MifarePlusMultiblockReadSL2: Integer; dispid 609;
+    function MifarePlusMultiblockWriteSL2: Integer; dispid 610;
+    function MifarePlusAuthSL2Crypto1: Integer; dispid 611;
+    function WriteEncryptedData: Integer; dispid 612;
+    property PollActivateMethod: TPollActivateMethod dispid 613;
+    property ReaderName: WideString dispid 168;
+    property DataAuthMode: TDataAuthMode dispid 169;
+    property UpdateTrailer: WordBool dispid 170;
+    property DataFormat: TDataFormat dispid 171;
+    property LogEnabled: WordBool dispid 172;
+    property LogFileName: WideString dispid 173;
+    property RedLED: WordBool dispid 401;
+    property GreenLED: WordBool dispid 402;
+    property BlueLED: WordBool dispid 403;
+    property ButtonState: WordBool readonly dispid 404;
+    function PcdControlLEDAndPoll: Integer; dispid 405;
+    function PcdControlLED: Integer; dispid 406;
+    function PcdPollButton: Integer; dispid 407;
+    function MksFindCard: Integer; dispid 153;
+    function MksReadCatalog: Integer; dispid 154;
+    function MksReopen: Integer; dispid 155;
+    function MksWriteCatalog: Integer; dispid 156;
+    function ShowConnectionPropertiesDlg: Integer; dispid 157;
+    property CardATQ: Integer dispid 158;
+    property DeviceType: TDeviceType dispid 159;
+    property Parity: Integer dispid 160;
+    property PortBaudRate: Integer dispid 161;
+    property RxData: WideString readonly dispid 162;
+    property RxDataHex: WideString readonly dispid 163;
+    property TxData: WideString readonly dispid 164;
+    property TxDataHex: WideString readonly dispid 165;
+    function SleepMode: Integer; dispid 166;
+    property PollAutoDisable: WordBool dispid 167;
+    procedure AboutBox; dispid -552;
+    function AddField: Integer; dispid 1;
+    function AuthStandard: Integer; dispid 2;
+    function ClearBlock: Integer; dispid 3;
+    function ClearFieldValues: Integer; dispid 4;
+    function ClosePort: Integer; dispid 5;
+    function Connect: Integer; dispid 6;
+    function DecodeTrailer: Integer; dispid 7;
+    function DecodeValueBlock: Integer; dispid 8;
+    function DeleteAllFields: Integer; dispid 9;
+    function DeleteAppSectors: Integer; dispid 10;
+    function DeleteField: Integer; dispid 11;
+    function DeleteSector: Integer; dispid 12;
+    function Disconnect: Integer; dispid 13;
+    function EncodeKey: Integer; dispid 14;
+    function EncodeTrailer: Integer; dispid 15;
+    function EncodeValueBlock: Integer; dispid 16;
+    function FindDevice: Integer; dispid 17;
+    function GetFieldParams: Integer; dispid 18;
+    function GetSectorParams: Integer; dispid 19;
+    function InterfaceSetTimeout: Integer; dispid 20;
+    function LoadFieldsFromFile: Integer; dispid 21;
+    function LoadParams: Integer; dispid 22;
+    function LoadValue: Integer; dispid 23;
+    function OpenPort: Integer; dispid 24;
+    function PcdBeep: Integer; dispid 25;
+    function PcdConfig: Integer; dispid 26;
+    function PcdGetFwVersion: Integer; dispid 27;
+    function PcdGetRicVersion: Integer; dispid 28;
+    function PcdGetSerialNumber: Integer; dispid 29;
+    function PcdLoadKeyE2: Integer; dispid 30;
+    function PcdReadE2: Integer; dispid 31;
+    function PcdReset: Integer; dispid 32;
+    function PcdRfReset: Integer; dispid 33;
+    function PcdSetDefaultAttrib: Integer; dispid 34;
+    function PcdSetTmo: Integer; dispid 35;
+    function PcdWriteE2: Integer; dispid 36;
+    function PiccActivateIdle: Integer; dispid 37;
+    function PiccActivateWakeup: Integer; dispid 38;
+    function PiccAnticoll: Integer; dispid 39;
+    function PiccAuth: Integer; dispid 40;
+    function PiccAuthE2: Integer; dispid 41;
+    function PiccAuthKey: Integer; dispid 42;
+    function PiccCascAnticoll: Integer; dispid 43;
+    function PiccCascSelect: Integer; dispid 44;
+    function PiccCommonRead: Integer; dispid 45;
+    function PiccCommonRequest: Integer; dispid 46;
+    function PiccCommonWrite: Integer; dispid 47;
+    function PiccHalt: Integer; dispid 48;
+    function PiccRead: Integer; dispid 49;
+    function PiccSelect: Integer; dispid 50;
+    function PiccValue: Integer; dispid 51;
+    function PiccValueDebit: Integer; dispid 52;
+    function PiccWrite: Integer; dispid 53;
+    function PollStart: Integer; dispid 54;
+    function PollStop: Integer; dispid 55;
+    function PortOpened: Integer; dispid 56;
+    function ReadData: Integer; dispid 57;
+    function ReadDirectory: Integer; dispid 58;
+    function ReadFields: Integer; dispid 59;
+    function ReadTrailer: Integer; dispid 60;
+    function RequestAll: Integer; dispid 61;
+    function RequestIdle: Integer; dispid 62;
+    function ResetCard: Integer; dispid 63;
+    function SaveFieldsToFile: Integer; dispid 64;
+    function SaveParams: Integer; dispid 65;
+    function SendEvent: Integer; dispid 66;
+    function SetDefaults: Integer; dispid 67;
+    function SetFieldParams: Integer; dispid 68;
+    function SetSectorParams: Integer; dispid 69;
+    function ShowDirectoryDlg: Integer; dispid 70;
+    function ShowFirmsDlg: Integer; dispid 71;
+    function ShowProperties: Integer; dispid 72;
+    function ShowSearchDlg: Integer; dispid 73;
+    function ShowTrailerDlg: Integer; dispid 74;
+    function StartTransTimer: Integer; dispid 75;
+    function StopTransTimer: Integer; dispid 76;
+    function TestBit(AValue: Integer; ABitIndex: Integer): WordBool; dispid 77;
+    function WriteData: Integer; dispid 78;
+    function WriteDirectory: Integer; dispid 79;
+    function WriteFields: Integer; dispid 80;
+    function WriteTrailer: Integer; dispid 81;
+    property AccessMode0: Integer dispid 82;
+    property AccessMode1: Integer dispid 83;
+    property AccessMode2: Integer dispid 84;
+    property AccessMode3: Integer dispid 85;
+    property AppCode: Integer dispid 86;
+    property ATQ: {??Word}OleVariant readonly dispid 87;
+    property BaudRate: TBaudRate dispid 88;
+    property BeepTone: Integer dispid 89;
+    property BitCount: Integer dispid 90;
+    property BlockAddr: Integer dispid 91;
+    property BlockData: WideString dispid 92;
+    property BlockDataHex: WideString dispid 93;
+    property BlockNumber: Integer dispid 94;
+    property BlockValue: Integer dispid 95;
+    property CardDescription: WideString readonly dispid 96;
+    property CardType: TCardType readonly dispid 97;
+    property Command: TDataCommand dispid 98;
+    property Connected: WordBool readonly dispid 99;
+    property Data: WideString dispid 100;
+    property DataLength: Integer dispid 101;
+    property DataMode: TDataMode dispid 102;
+    property DataSize: Integer dispid 103;
+    property DeltaValue: Integer dispid 104;
+    property DirectoryStatus: TDirectoryStatus readonly dispid 105;
+    property DirectoryStatusText: WideString readonly dispid 106;
+    property ErrorText: WideString readonly dispid 107;
+    property ExecutionTime: Integer readonly dispid 108;
+    property FieldCount: Integer readonly dispid 109;
+    property FieldIndex: Integer dispid 110;
+    property FieldSize: Integer dispid 111;
+    property FieldType: Integer dispid 112;
+    property FieldValue: WideString dispid 113;
+    property FileName: WideString dispid 114;
+    property FirmCode: Integer dispid 115;
+    property IsClient1C: WordBool readonly dispid 116;
+    property IsShowProperties: WordBool readonly dispid 117;
+    property KeyA: WideString dispid 118;
+    property KeyB: WideString dispid 119;
+    property KeyEncoded: WideString dispid 120;
+    property KeyNumber: Integer dispid 121;
+    property KeyType: TKeyType dispid 122;
+    property KeyUncoded: WideString dispid 123;
+    property LibInfoKey: Integer dispid 124;
+    property LockDevices: WordBool dispid 125;
+    property NewKeyA: WideString dispid 126;
+    property NewKeyB: WideString dispid 127;
+    property ParentWnd: Integer dispid 128;
+    property PasswordHeader: WideString readonly dispid 129;
+    property PcdFwVersion: WideString readonly dispid 130;
+    property PcdRicVersion: WideString readonly dispid 131;
+    property PollInterval: Integer dispid 132;
+    property PollStarted: WordBool readonly dispid 133;
+    property PortNumber: Integer dispid 134;
+    property ReqCode: TReqCode dispid 135;
+    property ResultCode: Integer readonly dispid 136;
+    property ResultDescription: WideString readonly dispid 137;
+    property RfResetTime: Integer dispid 138;
+    property RICValue: Integer dispid 139;
+    property SAK: Byte readonly dispid 140;
+    property SectorCount: Integer readonly dispid 141;
+    property SectorIndex: Integer dispid 142;
+    property SectorNumber: Integer dispid 143;
+    property SelectCode: TSelectCode dispid 144;
+    property Timeout: Integer dispid 145;
+    property TransBlockNumber: Integer dispid 146;
+    property TransTime: Integer dispid 147;
+    property UID: WideString dispid 148;
+    property UIDHex: WideString dispid 149;
+    property UIDLen: Byte readonly dispid 150;
+    property ValueOperation: TValueOperation dispid 151;
+    property Version: WideString readonly dispid 152;
+  end;
+
 
 // *********************************************************************//
 // OLE Control Proxy class declaration
@@ -2021,7 +2367,7 @@ type
 // OLE Control Proxy class declaration
 // Control Name     : TMifareDrv
 // Help String      : ØÒÐÈÕ-Ì: Äנאיגונ סקטעûגאעוכוי Mifare
-// Default Interface: IMifareDrv3
+// Default Interface: IMifareDrv4
 // Def. Intf. DISP? : No
 // Event   Interface: IMifareDrvEvents
 // TypeFlags        : (34) CanCreate Control
@@ -2035,8 +2381,8 @@ type
     FOnCardFound: TMifareDrvCardFound;
     FOnPollError: TMifareDrvPollError;
     FOnDriverEvent: TMifareDrvDriverEvent;
-    FIntf: IMifareDrv3;
-    function  GetControlInterface: IMifareDrv3;
+    FIntf: IMifareDrv4;
+    function  GetControlInterface: IMifareDrv4;
   protected
     procedure CreateControl;
     procedure InitControlData; override;
@@ -2183,8 +2529,9 @@ type
     function MifarePlusMultiblockWriteSL2: Integer;
     function MifarePlusAuthSL2Crypto1: Integer;
     function WriteEncryptedData: Integer;
-    property  ControlInterface: IMifareDrv3 read GetControlInterface;
-    property  DefaultInterface: IMifareDrv3 read GetControlInterface;
+    function MifarePlusSelectSAMSlot: Integer;
+    property  ControlInterface: IMifareDrv4 read GetControlInterface;
+    property  DefaultInterface: IMifareDrv4 read GetControlInterface;
     property ATQ: Word index 87 read GetWordProp;
     property CardDescription: WideString index 96 read GetWideStringProp;
     property CardType: TOleEnum index 97 read GetTOleEnumProp;
@@ -2253,6 +2600,11 @@ type
     property SAMMDProductionYear: Integer index 594 read GetIntegerProp;
     property SAMMDGlobalCryptoSettings: Integer index 595 read GetIntegerProp;
     property SAMMDUIDStr: WideString index 596 read GetWideStringProp;
+    property SlotStatus0: Integer index 618 read GetIntegerProp;
+    property SlotStatus1: Integer index 619 read GetIntegerProp;
+    property SlotStatus2: Integer index 620 read GetIntegerProp;
+    property SlotStatus3: Integer index 621 read GetIntegerProp;
+    property SlotStatus4: Integer index 622 read GetIntegerProp;
   published
     property Anchors;
     property AccessMode0: Integer index 82 read GetIntegerProp write SetIntegerProp stored False;
@@ -2340,9 +2692,340 @@ type
     property AnswerSignature: WordBool index 607 read GetWordBoolProp write SetWordBoolProp stored False;
     property CommandSignature: WordBool index 608 read GetWordBoolProp write SetWordBoolProp stored False;
     property PollActivateMethod: TOleEnum index 613 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property SlotNumber: Integer index 614 read GetIntegerProp write SetIntegerProp stored False;
+    property UseOptional: WordBool index 615 read GetWordBoolProp write SetWordBoolProp stored False;
+    property OptionalValue: Integer index 616 read GetIntegerProp write SetIntegerProp stored False;
     property OnCardFound: TMifareDrvCardFound read FOnCardFound write FOnCardFound;
     property OnPollError: TMifareDrvPollError read FOnPollError write FOnPollError;
     property OnDriverEvent: TMifareDrvDriverEvent read FOnDriverEvent write FOnDriverEvent;
+  end;
+
+
+// *********************************************************************//
+// OLE Control Proxy class declaration
+// Control Name     : TMifareDrv4
+// Help String      : ØÒÐÈÕ-Ì: Äנאיגונ סקטעûגאעוכוי Mifare 4
+// Default Interface: IMifareDrv4
+// Def. Intf. DISP? : No
+// Event   Interface: 
+// TypeFlags        : (34) CanCreate Control
+// *********************************************************************//
+  TMifareDrv4 = class(TOleControl)
+  private
+    FIntf: IMifareDrv4;
+    function  GetControlInterface: IMifareDrv4;
+  protected
+    procedure CreateControl;
+    procedure InitControlData; override;
+    function Get_SAMVersion: TSAMVersion;
+  public
+    procedure AboutBox;
+    function AddField: Integer;
+    function AuthStandard: Integer;
+    function ClearBlock: Integer;
+    function ClearFieldValues: Integer;
+    function ClosePort: Integer;
+    function Connect: Integer;
+    function DecodeTrailer: Integer;
+    function DecodeValueBlock: Integer;
+    function DeleteAllFields: Integer;
+    function DeleteAppSectors: Integer;
+    function DeleteField: Integer;
+    function DeleteSector: Integer;
+    function Disconnect: Integer;
+    function EncodeKey: Integer;
+    function EncodeTrailer: Integer;
+    function EncodeValueBlock: Integer;
+    function FindDevice: Integer;
+    function GetFieldParams: Integer;
+    function GetSectorParams: Integer;
+    function InterfaceSetTimeout: Integer;
+    function LoadFieldsFromFile: Integer;
+    function LoadParams: Integer;
+    function LoadValue: Integer;
+    function OpenPort: Integer;
+    function PcdBeep: Integer;
+    function PcdConfig: Integer;
+    function PcdGetFwVersion: Integer;
+    function PcdGetRicVersion: Integer;
+    function PcdGetSerialNumber: Integer;
+    function PcdLoadKeyE2: Integer;
+    function PcdReadE2: Integer;
+    function PcdReset: Integer;
+    function PcdRfReset: Integer;
+    function PcdSetDefaultAttrib: Integer;
+    function PcdSetTmo: Integer;
+    function PcdWriteE2: Integer;
+    function PiccActivateIdle: Integer;
+    function PiccActivateWakeup: Integer;
+    function PiccAnticoll: Integer;
+    function PiccAuth: Integer;
+    function PiccAuthE2: Integer;
+    function PiccAuthKey: Integer;
+    function PiccCascAnticoll: Integer;
+    function PiccCascSelect: Integer;
+    function PiccCommonRead: Integer;
+    function PiccCommonRequest: Integer;
+    function PiccCommonWrite: Integer;
+    function PiccHalt: Integer;
+    function PiccRead: Integer;
+    function PiccSelect: Integer;
+    function PiccValue: Integer;
+    function PiccValueDebit: Integer;
+    function PiccWrite: Integer;
+    function PollStart: Integer;
+    function PollStop: Integer;
+    function PortOpened: Integer;
+    function ReadData: Integer;
+    function ReadDirectory: Integer;
+    function ReadFields: Integer;
+    function ReadTrailer: Integer;
+    function RequestAll: Integer;
+    function RequestIdle: Integer;
+    function ResetCard: Integer;
+    function SaveFieldsToFile: Integer;
+    function SaveParams: Integer;
+    function SendEvent: Integer;
+    function SetDefaults: Integer;
+    function SetFieldParams: Integer;
+    function SetSectorParams: Integer;
+    function ShowDirectoryDlg: Integer;
+    function ShowFirmsDlg: Integer;
+    function ShowProperties: Integer;
+    function ShowSearchDlg: Integer;
+    function ShowTrailerDlg: Integer;
+    function StartTransTimer: Integer;
+    function StopTransTimer: Integer;
+    function TestBit(AValue: Integer; ABitIndex: Integer): WordBool;
+    function WriteData: Integer;
+    function WriteDirectory: Integer;
+    function WriteFields: Integer;
+    function WriteTrailer: Integer;
+    function MksFindCard: Integer;
+    function MksReadCatalog: Integer;
+    function MksReopen: Integer;
+    function MksWriteCatalog: Integer;
+    function ShowConnectionPropertiesDlg: Integer;
+    function SleepMode: Integer;
+    function PcdControlLEDAndPoll: Integer;
+    function PcdControlLED: Integer;
+    function PcdPollButton: Integer;
+    function FindEvent: Integer;
+    function DeleteEvent: Integer;
+    function ClearEvents: Integer;
+    function LockReader: Integer;
+    function UnlockReader: Integer;
+    function SAM_GetVersion: Integer;
+    function SAM_WriteKey: Integer;
+    function SAM_AuthKey: Integer;
+    function SAM_WriteHostAuthKey: Integer;
+    function SAM_GetKeyEntry: Integer;
+    function ReadFullSerialNumber: Integer;
+    function SAM_SetProtection: Integer;
+    function SAM_SetProtectionSN: Integer;
+    function WriteConnectionParams: Integer;
+    function UltralightRead: Integer;
+    function UltralightWrite: Integer;
+    function UltralightCompatWrite: Integer;
+    function UltralightWriteKey: Integer;
+    function UltralightAuth: Integer;
+    function MifarePlusWritePerso: Integer;
+    function MifarePlusWriteParameters: Integer;
+    function MifarePlusCommitPerso: Integer;
+    function MifarePlusAuthSL1: Integer;
+    function MifarePlusAuthSL3: Integer;
+    function MifarePlusIncrement: Integer;
+    function MifarePlusDecrement: Integer;
+    function MifarePlusIncrementTransfer: Integer;
+    function MifarePlusDecrementTransfer: Integer;
+    function MifarePlusRead: Integer;
+    function MifarePlusRestore: Integer;
+    function MifarePlusTransfer: Integer;
+    function MifarePlusReadValue: Integer;
+    function MifarePlusWriteValue: Integer;
+    function MifarePlusMultiblockRead: Integer;
+    function MifarePlusMultiblockWrite: Integer;
+    function MifarePlusResetAuthentication: Integer;
+    function MifarePlusWrite: Integer;
+    function ClearResult: Integer;
+    function EnableCardAccept: Integer;
+    function DisableCardAccept: Integer;
+    function ReadStatus: Integer;
+    function IssueCard: Integer;
+    function HoldCard: Integer;
+    function ReadLastAnswer: Integer;
+    function MifarePlusAuthSL2: Integer;
+    function SAMAV2WriteKey: Integer;
+    function MifarePlusMultiblockReadSL2: Integer;
+    function MifarePlusMultiblockWriteSL2: Integer;
+    function MifarePlusAuthSL2Crypto1: Integer;
+    function WriteEncryptedData: Integer;
+    function MifarePlusSelectSAMSlot: Integer;
+    property  ControlInterface: IMifareDrv4 read GetControlInterface;
+    property  DefaultInterface: IMifareDrv4 read GetControlInterface;
+    property ATQ: Word index 87 read GetWordProp;
+    property CardDescription: WideString index 96 read GetWideStringProp;
+    property CardType: TOleEnum index 97 read GetTOleEnumProp;
+    property Connected: WordBool index 99 read GetWordBoolProp;
+    property DirectoryStatus: TOleEnum index 105 read GetTOleEnumProp;
+    property DirectoryStatusText: WideString index 106 read GetWideStringProp;
+    property ErrorText: WideString index 107 read GetWideStringProp;
+    property ExecutionTime: Integer index 108 read GetIntegerProp;
+    property FieldCount: Integer index 109 read GetIntegerProp;
+    property IsClient1C: WordBool index 116 read GetWordBoolProp;
+    property IsShowProperties: WordBool index 117 read GetWordBoolProp;
+    property PasswordHeader: WideString index 129 read GetWideStringProp;
+    property PcdFwVersion: WideString index 130 read GetWideStringProp;
+    property PcdRicVersion: WideString index 131 read GetWideStringProp;
+    property PollStarted: WordBool index 133 read GetWordBoolProp;
+    property ResultCode: Integer index 136 read GetIntegerProp;
+    property ResultDescription: WideString index 137 read GetWideStringProp;
+    property SAK: Byte index 140 read GetByteProp;
+    property SectorCount: Integer index 141 read GetIntegerProp;
+    property UIDLen: Byte index 150 read GetByteProp;
+    property Version: WideString index 152 read GetWideStringProp;
+    property RxData: WideString index 162 read GetWideStringProp;
+    property RxDataHex: WideString index 163 read GetWideStringProp;
+    property TxData: WideString index 164 read GetWideStringProp;
+    property TxDataHex: WideString index 165 read GetWideStringProp;
+    property ButtonState: WordBool index 404 read GetWordBoolProp;
+    property EventDriverID: Integer index 502 read GetIntegerProp;
+    property EventType: Integer index 503 read GetIntegerProp;
+    property EventPortNumber: Integer index 504 read GetIntegerProp;
+    property EventErrorCode: Integer index 505 read GetIntegerProp;
+    property EventErrorText: WideString index 506 read GetWideStringProp;
+    property EventCardUIDHex: WideString index 507 read GetWideStringProp;
+    property EventCount: Integer index 513 read GetIntegerProp;
+    property DriverID: Integer index 511 read GetIntegerProp;
+    property SAMVersion: TSAMVersion read Get_SAMVersion;
+    property KeyVersion0: Integer index 531 read GetIntegerProp;
+    property KeyVersion1: Integer index 532 read GetIntegerProp;
+    property KeyVersion2: Integer index 533 read GetIntegerProp;
+    property KeyTypeText: WideString index 536 read GetWideStringProp;
+    property IsValueBlockCorrupted: WordBool index 539 read GetWordBoolProp;
+    property SAMHWVendorID: Integer index 569 read GetIntegerProp;
+    property SAMHWVendorName: WideString index 570 read GetWideStringProp;
+    property SAMHWType: Integer index 571 read GetIntegerProp;
+    property SAMHWSubType: Integer index 572 read GetIntegerProp;
+    property SAMHWMajorVersion: Integer index 573 read GetIntegerProp;
+    property SAMHWMinorVersion: Integer index 574 read GetIntegerProp;
+    property SAMHWProtocol: Integer index 575 read GetIntegerProp;
+    property SAMHWStorageSize: Integer index 576 read GetIntegerProp;
+    property SAMHWStorageSizeCode: Integer index 577 read GetIntegerProp;
+    property SAMSWVendorID: Integer index 578 read GetIntegerProp;
+    property SAMSWVendorName: WideString index 579 read GetWideStringProp;
+    property SAMSWType: Integer index 580 read GetIntegerProp;
+    property SAMSWSubType: Integer index 581 read GetIntegerProp;
+    property SAMSWMajorVersion: Integer index 582 read GetIntegerProp;
+    property SAMSWMinorVersion: Integer index 583 read GetIntegerProp;
+    property SAMSWProtocol: Integer index 584 read GetIntegerProp;
+    property SAMSWStorageSize: Integer index 585 read GetIntegerProp;
+    property SAMSWStorageSizeCode: Integer index 586 read GetIntegerProp;
+    property SAMMode: Integer index 587 read GetIntegerProp;
+    property SAMModeName: WideString index 588 read GetWideStringProp;
+    property SAMMDUID: Integer index 589 read GetIntegerProp;
+    property SAMMDUIDHex: WideString index 590 read GetWideStringProp;
+    property SAMMDBatchNo: Integer index 591 read GetIntegerProp;
+    property SAMMDProductionDay: Integer index 592 read GetIntegerProp;
+    property SAMMDProductionMonth: Integer index 593 read GetIntegerProp;
+    property SAMMDProductionYear: Integer index 594 read GetIntegerProp;
+    property SAMMDGlobalCryptoSettings: Integer index 595 read GetIntegerProp;
+    property SAMMDUIDStr: WideString index 596 read GetWideStringProp;
+    property SlotStatus0: Integer index 618 read GetIntegerProp;
+    property SlotStatus1: Integer index 619 read GetIntegerProp;
+    property SlotStatus2: Integer index 620 read GetIntegerProp;
+    property SlotStatus3: Integer index 621 read GetIntegerProp;
+    property SlotStatus4: Integer index 622 read GetIntegerProp;
+  published
+    property Anchors;
+    property AccessMode0: Integer index 82 read GetIntegerProp write SetIntegerProp stored False;
+    property AccessMode1: Integer index 83 read GetIntegerProp write SetIntegerProp stored False;
+    property AccessMode2: Integer index 84 read GetIntegerProp write SetIntegerProp stored False;
+    property AccessMode3: Integer index 85 read GetIntegerProp write SetIntegerProp stored False;
+    property AppCode: Integer index 86 read GetIntegerProp write SetIntegerProp stored False;
+    property BaudRate: TOleEnum index 88 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property BeepTone: Integer index 89 read GetIntegerProp write SetIntegerProp stored False;
+    property BitCount: Integer index 90 read GetIntegerProp write SetIntegerProp stored False;
+    property BlockAddr: Integer index 91 read GetIntegerProp write SetIntegerProp stored False;
+    property BlockData: WideString index 92 read GetWideStringProp write SetWideStringProp stored False;
+    property BlockDataHex: WideString index 93 read GetWideStringProp write SetWideStringProp stored False;
+    property BlockNumber: Integer index 94 read GetIntegerProp write SetIntegerProp stored False;
+    property BlockValue: Integer index 95 read GetIntegerProp write SetIntegerProp stored False;
+    property Command: TOleEnum index 98 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property Data: WideString index 100 read GetWideStringProp write SetWideStringProp stored False;
+    property DataLength: Integer index 101 read GetIntegerProp write SetIntegerProp stored False;
+    property DataMode: TOleEnum index 102 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property DataSize: Integer index 103 read GetIntegerProp write SetIntegerProp stored False;
+    property DeltaValue: Integer index 104 read GetIntegerProp write SetIntegerProp stored False;
+    property FieldIndex: Integer index 110 read GetIntegerProp write SetIntegerProp stored False;
+    property FieldSize: Integer index 111 read GetIntegerProp write SetIntegerProp stored False;
+    property FieldType: Integer index 112 read GetIntegerProp write SetIntegerProp stored False;
+    property FieldValue: WideString index 113 read GetWideStringProp write SetWideStringProp stored False;
+    property FileName: WideString index 114 read GetWideStringProp write SetWideStringProp stored False;
+    property FirmCode: Integer index 115 read GetIntegerProp write SetIntegerProp stored False;
+    property KeyA: WideString index 118 read GetWideStringProp write SetWideStringProp stored False;
+    property KeyB: WideString index 119 read GetWideStringProp write SetWideStringProp stored False;
+    property KeyEncoded: WideString index 120 read GetWideStringProp write SetWideStringProp stored False;
+    property KeyNumber: Integer index 121 read GetIntegerProp write SetIntegerProp stored False;
+    property KeyType: TOleEnum index 122 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property KeyUncoded: WideString index 123 read GetWideStringProp write SetWideStringProp stored False;
+    property LibInfoKey: Integer index 124 read GetIntegerProp write SetIntegerProp stored False;
+    property LockDevices: WordBool index 125 read GetWordBoolProp write SetWordBoolProp stored False;
+    property NewKeyA: WideString index 126 read GetWideStringProp write SetWideStringProp stored False;
+    property NewKeyB: WideString index 127 read GetWideStringProp write SetWideStringProp stored False;
+    property ParentWnd: Integer index 128 read GetIntegerProp write SetIntegerProp stored False;
+    property PollInterval: Integer index 132 read GetIntegerProp write SetIntegerProp stored False;
+    property PortNumber: Integer index 134 read GetIntegerProp write SetIntegerProp stored False;
+    property ReqCode: TOleEnum index 135 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property RfResetTime: Integer index 138 read GetIntegerProp write SetIntegerProp stored False;
+    property RICValue: Integer index 139 read GetIntegerProp write SetIntegerProp stored False;
+    property SectorIndex: Integer index 142 read GetIntegerProp write SetIntegerProp stored False;
+    property SectorNumber: Integer index 143 read GetIntegerProp write SetIntegerProp stored False;
+    property SelectCode: TOleEnum index 144 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property Timeout: Integer index 145 read GetIntegerProp write SetIntegerProp stored False;
+    property TransBlockNumber: Integer index 146 read GetIntegerProp write SetIntegerProp stored False;
+    property TransTime: Integer index 147 read GetIntegerProp write SetIntegerProp stored False;
+    property UID: WideString index 148 read GetWideStringProp write SetWideStringProp stored False;
+    property UIDHex: WideString index 149 read GetWideStringProp write SetWideStringProp stored False;
+    property ValueOperation: TOleEnum index 151 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property CardATQ: Integer index 158 read GetIntegerProp write SetIntegerProp stored False;
+    property DeviceType: TOleEnum index 159 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property Parity: Integer index 160 read GetIntegerProp write SetIntegerProp stored False;
+    property PortBaudRate: Integer index 161 read GetIntegerProp write SetIntegerProp stored False;
+    property PollAutoDisable: WordBool index 167 read GetWordBoolProp write SetWordBoolProp stored False;
+    property ReaderName: WideString index 168 read GetWideStringProp write SetWideStringProp stored False;
+    property DataAuthMode: TOleEnum index 169 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property UpdateTrailer: WordBool index 170 read GetWordBoolProp write SetWordBoolProp stored False;
+    property DataFormat: TOleEnum index 171 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property LogEnabled: WordBool index 172 read GetWordBoolProp write SetWordBoolProp stored False;
+    property LogFileName: WideString index 173 read GetWideStringProp write SetWideStringProp stored False;
+    property RedLED: WordBool index 401 read GetWordBoolProp write SetWordBoolProp stored False;
+    property GreenLED: WordBool index 402 read GetWordBoolProp write SetWordBoolProp stored False;
+    property BlueLED: WordBool index 403 read GetWordBoolProp write SetWordBoolProp stored False;
+    property EventID: Integer index 501 read GetIntegerProp write SetIntegerProp stored False;
+    property EventsEnabled: WordBool index 510 read GetWordBoolProp write SetWordBoolProp stored False;
+    property YellowLED: WordBool index 516 read GetWordBoolProp write SetWordBoolProp stored False;
+    property KeyPosition: Integer index 520 read GetIntegerProp write SetIntegerProp stored False;
+    property KeyVersion: Integer index 521 read GetIntegerProp write SetIntegerProp stored False;
+    property LogFilePath: WideString index 523 read GetWideStringProp write SetWideStringProp stored False;
+    property ParamsRegKey: WideString index 524 read GetWideStringProp write SetWideStringProp stored False;
+    property KeyEntryNumber: Integer index 530 read GetIntegerProp write SetIntegerProp stored False;
+    property SerialNumber: WideString index 534 read GetWideStringProp write SetWideStringProp stored False;
+    property SerialNumberHex: WideString index 535 read GetWideStringProp write SetWideStringProp stored False;
+    property ErrorOnCorruptedValueBlock: WordBool index 538 read GetWordBoolProp write SetWordBoolProp stored False;
+    property ReceiveDivisor: Integer index 548 read GetIntegerProp write SetIntegerProp stored False;
+    property SendDivisor: Integer index 549 read GetIntegerProp write SetIntegerProp stored False;
+    property AuthType: Integer index 564 read GetIntegerProp write SetIntegerProp stored False;
+    property BlockCount: Integer index 565 read GetIntegerProp write SetIntegerProp stored False;
+    property NewBaudRate: Integer index 567 read GetIntegerProp write SetIntegerProp stored False;
+    property Protocol: Integer index 603 read GetIntegerProp write SetIntegerProp stored False;
+    property EncryptionEnabled: WordBool index 606 read GetWordBoolProp write SetWordBoolProp stored False;
+    property AnswerSignature: WordBool index 607 read GetWordBoolProp write SetWordBoolProp stored False;
+    property CommandSignature: WordBool index 608 read GetWordBoolProp write SetWordBoolProp stored False;
+    property PollActivateMethod: TOleEnum index 613 read GetTOleEnumProp write SetTOleEnumProp stored False;
+    property SlotNumber: Integer index 614 read GetIntegerProp write SetIntegerProp stored False;
+    property UseOptional: WordBool index 615 read GetWordBoolProp write SetWordBoolProp stored False;
+    property OptionalValue: Integer index 616 read GetIntegerProp write SetIntegerProp stored False;
   end;
 
 procedure Register;
@@ -3121,14 +3804,14 @@ procedure TMifareDrv.CreateControl;
 
   procedure DoCreate;
   begin
-    FIntf := IUnknown(OleObject) as IMifareDrv3;
+    FIntf := IUnknown(OleObject) as IMifareDrv4;
   end;
 
 begin
   if FIntf = nil then DoCreate;
 end;
 
-function TMifareDrv.GetControlInterface: IMifareDrv3;
+function TMifareDrv.GetControlInterface: IMifareDrv4;
 begin
   CreateControl;
   Result := FIntf;
@@ -3844,9 +4527,760 @@ begin
   Result := DefaultInterface.WriteEncryptedData;
 end;
 
+function TMifareDrv.MifarePlusSelectSAMSlot: Integer;
+begin
+  Result := DefaultInterface.MifarePlusSelectSAMSlot;
+end;
+
+procedure TMifareDrv4.InitControlData;
+const
+  CControlData: TControlData2 = (
+    ClassID: '{DD055FE8-636A-4666-8D75-7CF115D5A159}';
+    EventIID: '';
+    EventCount: 0;
+    EventDispIDs: nil;
+    LicenseKey: nil (*HR:$80040154*);
+    Flags: $00000000;
+    Version: 401);
+begin
+  ControlData := @CControlData;
+end;
+
+procedure TMifareDrv4.CreateControl;
+
+  procedure DoCreate;
+  begin
+    FIntf := IUnknown(OleObject) as IMifareDrv4;
+  end;
+
+begin
+  if FIntf = nil then DoCreate;
+end;
+
+function TMifareDrv4.GetControlInterface: IMifareDrv4;
+begin
+  CreateControl;
+  Result := FIntf;
+end;
+
+function TMifareDrv4.Get_SAMVersion: TSAMVersion;
+begin
+    Result := DefaultInterface.SAMVersion;
+end;
+
+procedure TMifareDrv4.AboutBox;
+begin
+  DefaultInterface.AboutBox;
+end;
+
+function TMifareDrv4.AddField: Integer;
+begin
+  Result := DefaultInterface.AddField;
+end;
+
+function TMifareDrv4.AuthStandard: Integer;
+begin
+  Result := DefaultInterface.AuthStandard;
+end;
+
+function TMifareDrv4.ClearBlock: Integer;
+begin
+  Result := DefaultInterface.ClearBlock;
+end;
+
+function TMifareDrv4.ClearFieldValues: Integer;
+begin
+  Result := DefaultInterface.ClearFieldValues;
+end;
+
+function TMifareDrv4.ClosePort: Integer;
+begin
+  Result := DefaultInterface.ClosePort;
+end;
+
+function TMifareDrv4.Connect: Integer;
+begin
+  Result := DefaultInterface.Connect;
+end;
+
+function TMifareDrv4.DecodeTrailer: Integer;
+begin
+  Result := DefaultInterface.DecodeTrailer;
+end;
+
+function TMifareDrv4.DecodeValueBlock: Integer;
+begin
+  Result := DefaultInterface.DecodeValueBlock;
+end;
+
+function TMifareDrv4.DeleteAllFields: Integer;
+begin
+  Result := DefaultInterface.DeleteAllFields;
+end;
+
+function TMifareDrv4.DeleteAppSectors: Integer;
+begin
+  Result := DefaultInterface.DeleteAppSectors;
+end;
+
+function TMifareDrv4.DeleteField: Integer;
+begin
+  Result := DefaultInterface.DeleteField;
+end;
+
+function TMifareDrv4.DeleteSector: Integer;
+begin
+  Result := DefaultInterface.DeleteSector;
+end;
+
+function TMifareDrv4.Disconnect: Integer;
+begin
+  Result := DefaultInterface.Disconnect;
+end;
+
+function TMifareDrv4.EncodeKey: Integer;
+begin
+  Result := DefaultInterface.EncodeKey;
+end;
+
+function TMifareDrv4.EncodeTrailer: Integer;
+begin
+  Result := DefaultInterface.EncodeTrailer;
+end;
+
+function TMifareDrv4.EncodeValueBlock: Integer;
+begin
+  Result := DefaultInterface.EncodeValueBlock;
+end;
+
+function TMifareDrv4.FindDevice: Integer;
+begin
+  Result := DefaultInterface.FindDevice;
+end;
+
+function TMifareDrv4.GetFieldParams: Integer;
+begin
+  Result := DefaultInterface.GetFieldParams;
+end;
+
+function TMifareDrv4.GetSectorParams: Integer;
+begin
+  Result := DefaultInterface.GetSectorParams;
+end;
+
+function TMifareDrv4.InterfaceSetTimeout: Integer;
+begin
+  Result := DefaultInterface.InterfaceSetTimeout;
+end;
+
+function TMifareDrv4.LoadFieldsFromFile: Integer;
+begin
+  Result := DefaultInterface.LoadFieldsFromFile;
+end;
+
+function TMifareDrv4.LoadParams: Integer;
+begin
+  Result := DefaultInterface.LoadParams;
+end;
+
+function TMifareDrv4.LoadValue: Integer;
+begin
+  Result := DefaultInterface.LoadValue;
+end;
+
+function TMifareDrv4.OpenPort: Integer;
+begin
+  Result := DefaultInterface.OpenPort;
+end;
+
+function TMifareDrv4.PcdBeep: Integer;
+begin
+  Result := DefaultInterface.PcdBeep;
+end;
+
+function TMifareDrv4.PcdConfig: Integer;
+begin
+  Result := DefaultInterface.PcdConfig;
+end;
+
+function TMifareDrv4.PcdGetFwVersion: Integer;
+begin
+  Result := DefaultInterface.PcdGetFwVersion;
+end;
+
+function TMifareDrv4.PcdGetRicVersion: Integer;
+begin
+  Result := DefaultInterface.PcdGetRicVersion;
+end;
+
+function TMifareDrv4.PcdGetSerialNumber: Integer;
+begin
+  Result := DefaultInterface.PcdGetSerialNumber;
+end;
+
+function TMifareDrv4.PcdLoadKeyE2: Integer;
+begin
+  Result := DefaultInterface.PcdLoadKeyE2;
+end;
+
+function TMifareDrv4.PcdReadE2: Integer;
+begin
+  Result := DefaultInterface.PcdReadE2;
+end;
+
+function TMifareDrv4.PcdReset: Integer;
+begin
+  Result := DefaultInterface.PcdReset;
+end;
+
+function TMifareDrv4.PcdRfReset: Integer;
+begin
+  Result := DefaultInterface.PcdRfReset;
+end;
+
+function TMifareDrv4.PcdSetDefaultAttrib: Integer;
+begin
+  Result := DefaultInterface.PcdSetDefaultAttrib;
+end;
+
+function TMifareDrv4.PcdSetTmo: Integer;
+begin
+  Result := DefaultInterface.PcdSetTmo;
+end;
+
+function TMifareDrv4.PcdWriteE2: Integer;
+begin
+  Result := DefaultInterface.PcdWriteE2;
+end;
+
+function TMifareDrv4.PiccActivateIdle: Integer;
+begin
+  Result := DefaultInterface.PiccActivateIdle;
+end;
+
+function TMifareDrv4.PiccActivateWakeup: Integer;
+begin
+  Result := DefaultInterface.PiccActivateWakeup;
+end;
+
+function TMifareDrv4.PiccAnticoll: Integer;
+begin
+  Result := DefaultInterface.PiccAnticoll;
+end;
+
+function TMifareDrv4.PiccAuth: Integer;
+begin
+  Result := DefaultInterface.PiccAuth;
+end;
+
+function TMifareDrv4.PiccAuthE2: Integer;
+begin
+  Result := DefaultInterface.PiccAuthE2;
+end;
+
+function TMifareDrv4.PiccAuthKey: Integer;
+begin
+  Result := DefaultInterface.PiccAuthKey;
+end;
+
+function TMifareDrv4.PiccCascAnticoll: Integer;
+begin
+  Result := DefaultInterface.PiccCascAnticoll;
+end;
+
+function TMifareDrv4.PiccCascSelect: Integer;
+begin
+  Result := DefaultInterface.PiccCascSelect;
+end;
+
+function TMifareDrv4.PiccCommonRead: Integer;
+begin
+  Result := DefaultInterface.PiccCommonRead;
+end;
+
+function TMifareDrv4.PiccCommonRequest: Integer;
+begin
+  Result := DefaultInterface.PiccCommonRequest;
+end;
+
+function TMifareDrv4.PiccCommonWrite: Integer;
+begin
+  Result := DefaultInterface.PiccCommonWrite;
+end;
+
+function TMifareDrv4.PiccHalt: Integer;
+begin
+  Result := DefaultInterface.PiccHalt;
+end;
+
+function TMifareDrv4.PiccRead: Integer;
+begin
+  Result := DefaultInterface.PiccRead;
+end;
+
+function TMifareDrv4.PiccSelect: Integer;
+begin
+  Result := DefaultInterface.PiccSelect;
+end;
+
+function TMifareDrv4.PiccValue: Integer;
+begin
+  Result := DefaultInterface.PiccValue;
+end;
+
+function TMifareDrv4.PiccValueDebit: Integer;
+begin
+  Result := DefaultInterface.PiccValueDebit;
+end;
+
+function TMifareDrv4.PiccWrite: Integer;
+begin
+  Result := DefaultInterface.PiccWrite;
+end;
+
+function TMifareDrv4.PollStart: Integer;
+begin
+  Result := DefaultInterface.PollStart;
+end;
+
+function TMifareDrv4.PollStop: Integer;
+begin
+  Result := DefaultInterface.PollStop;
+end;
+
+function TMifareDrv4.PortOpened: Integer;
+begin
+  Result := DefaultInterface.PortOpened;
+end;
+
+function TMifareDrv4.ReadData: Integer;
+begin
+  Result := DefaultInterface.ReadData;
+end;
+
+function TMifareDrv4.ReadDirectory: Integer;
+begin
+  Result := DefaultInterface.ReadDirectory;
+end;
+
+function TMifareDrv4.ReadFields: Integer;
+begin
+  Result := DefaultInterface.ReadFields;
+end;
+
+function TMifareDrv4.ReadTrailer: Integer;
+begin
+  Result := DefaultInterface.ReadTrailer;
+end;
+
+function TMifareDrv4.RequestAll: Integer;
+begin
+  Result := DefaultInterface.RequestAll;
+end;
+
+function TMifareDrv4.RequestIdle: Integer;
+begin
+  Result := DefaultInterface.RequestIdle;
+end;
+
+function TMifareDrv4.ResetCard: Integer;
+begin
+  Result := DefaultInterface.ResetCard;
+end;
+
+function TMifareDrv4.SaveFieldsToFile: Integer;
+begin
+  Result := DefaultInterface.SaveFieldsToFile;
+end;
+
+function TMifareDrv4.SaveParams: Integer;
+begin
+  Result := DefaultInterface.SaveParams;
+end;
+
+function TMifareDrv4.SendEvent: Integer;
+begin
+  Result := DefaultInterface.SendEvent;
+end;
+
+function TMifareDrv4.SetDefaults: Integer;
+begin
+  Result := DefaultInterface.SetDefaults;
+end;
+
+function TMifareDrv4.SetFieldParams: Integer;
+begin
+  Result := DefaultInterface.SetFieldParams;
+end;
+
+function TMifareDrv4.SetSectorParams: Integer;
+begin
+  Result := DefaultInterface.SetSectorParams;
+end;
+
+function TMifareDrv4.ShowDirectoryDlg: Integer;
+begin
+  Result := DefaultInterface.ShowDirectoryDlg;
+end;
+
+function TMifareDrv4.ShowFirmsDlg: Integer;
+begin
+  Result := DefaultInterface.ShowFirmsDlg;
+end;
+
+function TMifareDrv4.ShowProperties: Integer;
+begin
+  Result := DefaultInterface.ShowProperties;
+end;
+
+function TMifareDrv4.ShowSearchDlg: Integer;
+begin
+  Result := DefaultInterface.ShowSearchDlg;
+end;
+
+function TMifareDrv4.ShowTrailerDlg: Integer;
+begin
+  Result := DefaultInterface.ShowTrailerDlg;
+end;
+
+function TMifareDrv4.StartTransTimer: Integer;
+begin
+  Result := DefaultInterface.StartTransTimer;
+end;
+
+function TMifareDrv4.StopTransTimer: Integer;
+begin
+  Result := DefaultInterface.StopTransTimer;
+end;
+
+function TMifareDrv4.TestBit(AValue: Integer; ABitIndex: Integer): WordBool;
+begin
+  Result := DefaultInterface.TestBit(AValue, ABitIndex);
+end;
+
+function TMifareDrv4.WriteData: Integer;
+begin
+  Result := DefaultInterface.WriteData;
+end;
+
+function TMifareDrv4.WriteDirectory: Integer;
+begin
+  Result := DefaultInterface.WriteDirectory;
+end;
+
+function TMifareDrv4.WriteFields: Integer;
+begin
+  Result := DefaultInterface.WriteFields;
+end;
+
+function TMifareDrv4.WriteTrailer: Integer;
+begin
+  Result := DefaultInterface.WriteTrailer;
+end;
+
+function TMifareDrv4.MksFindCard: Integer;
+begin
+  Result := DefaultInterface.MksFindCard;
+end;
+
+function TMifareDrv4.MksReadCatalog: Integer;
+begin
+  Result := DefaultInterface.MksReadCatalog;
+end;
+
+function TMifareDrv4.MksReopen: Integer;
+begin
+  Result := DefaultInterface.MksReopen;
+end;
+
+function TMifareDrv4.MksWriteCatalog: Integer;
+begin
+  Result := DefaultInterface.MksWriteCatalog;
+end;
+
+function TMifareDrv4.ShowConnectionPropertiesDlg: Integer;
+begin
+  Result := DefaultInterface.ShowConnectionPropertiesDlg;
+end;
+
+function TMifareDrv4.SleepMode: Integer;
+begin
+  Result := DefaultInterface.SleepMode;
+end;
+
+function TMifareDrv4.PcdControlLEDAndPoll: Integer;
+begin
+  Result := DefaultInterface.PcdControlLEDAndPoll;
+end;
+
+function TMifareDrv4.PcdControlLED: Integer;
+begin
+  Result := DefaultInterface.PcdControlLED;
+end;
+
+function TMifareDrv4.PcdPollButton: Integer;
+begin
+  Result := DefaultInterface.PcdPollButton;
+end;
+
+function TMifareDrv4.FindEvent: Integer;
+begin
+  Result := DefaultInterface.FindEvent;
+end;
+
+function TMifareDrv4.DeleteEvent: Integer;
+begin
+  Result := DefaultInterface.DeleteEvent;
+end;
+
+function TMifareDrv4.ClearEvents: Integer;
+begin
+  Result := DefaultInterface.ClearEvents;
+end;
+
+function TMifareDrv4.LockReader: Integer;
+begin
+  Result := DefaultInterface.LockReader;
+end;
+
+function TMifareDrv4.UnlockReader: Integer;
+begin
+  Result := DefaultInterface.UnlockReader;
+end;
+
+function TMifareDrv4.SAM_GetVersion: Integer;
+begin
+  Result := DefaultInterface.SAM_GetVersion;
+end;
+
+function TMifareDrv4.SAM_WriteKey: Integer;
+begin
+  Result := DefaultInterface.SAM_WriteKey;
+end;
+
+function TMifareDrv4.SAM_AuthKey: Integer;
+begin
+  Result := DefaultInterface.SAM_AuthKey;
+end;
+
+function TMifareDrv4.SAM_WriteHostAuthKey: Integer;
+begin
+  Result := DefaultInterface.SAM_WriteHostAuthKey;
+end;
+
+function TMifareDrv4.SAM_GetKeyEntry: Integer;
+begin
+  Result := DefaultInterface.SAM_GetKeyEntry;
+end;
+
+function TMifareDrv4.ReadFullSerialNumber: Integer;
+begin
+  Result := DefaultInterface.ReadFullSerialNumber;
+end;
+
+function TMifareDrv4.SAM_SetProtection: Integer;
+begin
+  Result := DefaultInterface.SAM_SetProtection;
+end;
+
+function TMifareDrv4.SAM_SetProtectionSN: Integer;
+begin
+  Result := DefaultInterface.SAM_SetProtectionSN;
+end;
+
+function TMifareDrv4.WriteConnectionParams: Integer;
+begin
+  Result := DefaultInterface.WriteConnectionParams;
+end;
+
+function TMifareDrv4.UltralightRead: Integer;
+begin
+  Result := DefaultInterface.UltralightRead;
+end;
+
+function TMifareDrv4.UltralightWrite: Integer;
+begin
+  Result := DefaultInterface.UltralightWrite;
+end;
+
+function TMifareDrv4.UltralightCompatWrite: Integer;
+begin
+  Result := DefaultInterface.UltralightCompatWrite;
+end;
+
+function TMifareDrv4.UltralightWriteKey: Integer;
+begin
+  Result := DefaultInterface.UltralightWriteKey;
+end;
+
+function TMifareDrv4.UltralightAuth: Integer;
+begin
+  Result := DefaultInterface.UltralightAuth;
+end;
+
+function TMifareDrv4.MifarePlusWritePerso: Integer;
+begin
+  Result := DefaultInterface.MifarePlusWritePerso;
+end;
+
+function TMifareDrv4.MifarePlusWriteParameters: Integer;
+begin
+  Result := DefaultInterface.MifarePlusWriteParameters;
+end;
+
+function TMifareDrv4.MifarePlusCommitPerso: Integer;
+begin
+  Result := DefaultInterface.MifarePlusCommitPerso;
+end;
+
+function TMifareDrv4.MifarePlusAuthSL1: Integer;
+begin
+  Result := DefaultInterface.MifarePlusAuthSL1;
+end;
+
+function TMifareDrv4.MifarePlusAuthSL3: Integer;
+begin
+  Result := DefaultInterface.MifarePlusAuthSL3;
+end;
+
+function TMifareDrv4.MifarePlusIncrement: Integer;
+begin
+  Result := DefaultInterface.MifarePlusIncrement;
+end;
+
+function TMifareDrv4.MifarePlusDecrement: Integer;
+begin
+  Result := DefaultInterface.MifarePlusDecrement;
+end;
+
+function TMifareDrv4.MifarePlusIncrementTransfer: Integer;
+begin
+  Result := DefaultInterface.MifarePlusIncrementTransfer;
+end;
+
+function TMifareDrv4.MifarePlusDecrementTransfer: Integer;
+begin
+  Result := DefaultInterface.MifarePlusDecrementTransfer;
+end;
+
+function TMifareDrv4.MifarePlusRead: Integer;
+begin
+  Result := DefaultInterface.MifarePlusRead;
+end;
+
+function TMifareDrv4.MifarePlusRestore: Integer;
+begin
+  Result := DefaultInterface.MifarePlusRestore;
+end;
+
+function TMifareDrv4.MifarePlusTransfer: Integer;
+begin
+  Result := DefaultInterface.MifarePlusTransfer;
+end;
+
+function TMifareDrv4.MifarePlusReadValue: Integer;
+begin
+  Result := DefaultInterface.MifarePlusReadValue;
+end;
+
+function TMifareDrv4.MifarePlusWriteValue: Integer;
+begin
+  Result := DefaultInterface.MifarePlusWriteValue;
+end;
+
+function TMifareDrv4.MifarePlusMultiblockRead: Integer;
+begin
+  Result := DefaultInterface.MifarePlusMultiblockRead;
+end;
+
+function TMifareDrv4.MifarePlusMultiblockWrite: Integer;
+begin
+  Result := DefaultInterface.MifarePlusMultiblockWrite;
+end;
+
+function TMifareDrv4.MifarePlusResetAuthentication: Integer;
+begin
+  Result := DefaultInterface.MifarePlusResetAuthentication;
+end;
+
+function TMifareDrv4.MifarePlusWrite: Integer;
+begin
+  Result := DefaultInterface.MifarePlusWrite;
+end;
+
+function TMifareDrv4.ClearResult: Integer;
+begin
+  Result := DefaultInterface.ClearResult;
+end;
+
+function TMifareDrv4.EnableCardAccept: Integer;
+begin
+  Result := DefaultInterface.EnableCardAccept;
+end;
+
+function TMifareDrv4.DisableCardAccept: Integer;
+begin
+  Result := DefaultInterface.DisableCardAccept;
+end;
+
+function TMifareDrv4.ReadStatus: Integer;
+begin
+  Result := DefaultInterface.ReadStatus;
+end;
+
+function TMifareDrv4.IssueCard: Integer;
+begin
+  Result := DefaultInterface.IssueCard;
+end;
+
+function TMifareDrv4.HoldCard: Integer;
+begin
+  Result := DefaultInterface.HoldCard;
+end;
+
+function TMifareDrv4.ReadLastAnswer: Integer;
+begin
+  Result := DefaultInterface.ReadLastAnswer;
+end;
+
+function TMifareDrv4.MifarePlusAuthSL2: Integer;
+begin
+  Result := DefaultInterface.MifarePlusAuthSL2;
+end;
+
+function TMifareDrv4.SAMAV2WriteKey: Integer;
+begin
+  Result := DefaultInterface.SAMAV2WriteKey;
+end;
+
+function TMifareDrv4.MifarePlusMultiblockReadSL2: Integer;
+begin
+  Result := DefaultInterface.MifarePlusMultiblockReadSL2;
+end;
+
+function TMifareDrv4.MifarePlusMultiblockWriteSL2: Integer;
+begin
+  Result := DefaultInterface.MifarePlusMultiblockWriteSL2;
+end;
+
+function TMifareDrv4.MifarePlusAuthSL2Crypto1: Integer;
+begin
+  Result := DefaultInterface.MifarePlusAuthSL2Crypto1;
+end;
+
+function TMifareDrv4.WriteEncryptedData: Integer;
+begin
+  Result := DefaultInterface.WriteEncryptedData;
+end;
+
+function TMifareDrv4.MifarePlusSelectSAMSlot: Integer;
+begin
+  Result := DefaultInterface.MifarePlusSelectSAMSlot;
+end;
+
 procedure Register;
 begin
-  RegisterComponents(dtlOcxPage, [TMifareDrv2, TMifareDrv]);
+  RegisterComponents(dtlOcxPage, [TMifareDrv2, TMifareDrv, TMifareDrv4]);
 end;
 
 end.

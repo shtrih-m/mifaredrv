@@ -169,6 +169,25 @@ type
     BlockData: string;
   end;
 
+  { TSelectSAM }
+
+  TSelectSAM = record
+    SlotNumber: Byte; // Номер слота. Значение от 0 до 4.
+    Optional: Byte;   // Опциональный байт.
+    UseOptional: Boolean;
+  end;
+
+  { TSelectSAMAnswer }
+
+  TSelectSAMAnswer = record
+    SlotNumber: Byte;  // Текущий слот. Значение от 0 до 4. Либо 0xFF если работа без SAM модуля
+    SlotStatus0: Byte; // Статус слота 0
+    SlotStatus1: Byte; // Статус слота 1
+    SlotStatus2: Byte; // Статус слота 2
+    SlotStatus3: Byte; // Статус слота 3
+    SlotStatus4: Byte; // Статус слота 4
+  end;
+
   { ICardReader }
 
   ICardReader = interface
@@ -288,6 +307,7 @@ type
     function ReadLastAnswer: string;
     procedure SAMAV2WriteKey(const P: TSAMAV2Key);
     procedure MifarePlusAuthSL2Crypto1(const P: TMifarePlusAuthSL2Crypto1);
+    procedure MifarePlusSelectSAMSlot(const P: TSelectSAM; var R: TSelectSAMAnswer);
 
     property RxData: string read GetRxData;
     property TxData: string read GetTxData;
