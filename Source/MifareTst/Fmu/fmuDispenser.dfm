@@ -13,6 +13,9 @@ object fmDispenser: TfmDispenser
   Font.Style = []
   OldCreateOrder = False
   ShowHint = True
+  DesignSize = (
+    390
+    287)
   PixelsPerInch = 96
   TextHeight = 13
   object btnEnableCardAccept: TButton
@@ -21,6 +24,7 @@ object fmDispenser: TfmDispenser
     Width = 155
     Height = 25
     Hint = 'EnableCardAccept'
+    Anchors = [akRight, akBottom]
     Caption = #1056#1072#1079#1088#1077#1096#1080#1090#1100' '#1087#1088#1080#1077#1084' '#1082#1072#1088#1090
     TabOrder = 1
     OnClick = btnEnableCardAcceptClick
@@ -31,6 +35,7 @@ object fmDispenser: TfmDispenser
     Width = 155
     Height = 25
     Hint = 'DisableCardAccept'
+    Anchors = [akRight, akBottom]
     Caption = #1047#1072#1087#1088#1077#1090#1080#1090#1100' '#1087#1088#1080#1077#1084' '#1082#1072#1088#1090
     TabOrder = 2
     OnClick = btnDisableCardAcceptClick
@@ -41,6 +46,7 @@ object fmDispenser: TfmDispenser
     Width = 155
     Height = 25
     Hint = 'ReadStatus'
+    Anchors = [akRight, akBottom]
     Caption = #1047#1072#1087#1088#1086#1089#1080#1090#1100' '#1089#1090#1072#1090#1091#1089
     TabOrder = 3
     OnClick = btnReadStatusClick
@@ -51,6 +57,7 @@ object fmDispenser: TfmDispenser
     Width = 155
     Height = 25
     Hint = 'HoldCard'
+    Anchors = [akRight, akBottom]
     Caption = #1047#1072#1093#1074#1072#1090#1080#1090#1100' '#1082#1072#1088#1090#1091
     TabOrder = 5
     OnClick = btnHoldCardClick
@@ -61,6 +68,7 @@ object fmDispenser: TfmDispenser
     Width = 155
     Height = 25
     Hint = 'ReadLastAnswer'
+    Anchors = [akRight, akBottom]
     Caption = #1055#1086#1083#1091#1095#1080#1090#1100' '#1086#1090#1074#1077#1090
     TabOrder = 6
     OnClick = btnReadLastAnswerClick
@@ -71,6 +79,7 @@ object fmDispenser: TfmDispenser
     Width = 155
     Height = 25
     Hint = 'IssueCard'
+    Anchors = [akRight, akBottom]
     Caption = #1042#1099#1076#1072#1090#1100' '#1082#1072#1088#1090#1091
     TabOrder = 4
     OnClick = btnIssueCardClick
@@ -80,6 +89,7 @@ object fmDispenser: TfmDispenser
     Top = 8
     Width = 377
     Height = 177
+    Anchors = [akLeft, akTop, akRight, akBottom]
     ScrollBars = ssVertical
     TabOrder = 0
   end

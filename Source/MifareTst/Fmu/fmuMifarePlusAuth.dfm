@@ -1,6 +1,6 @@
 object fmMifarePlusAuth: TfmMifarePlusAuth
-  Left = 942
-  Top = 301
+  Left = 563
+  Top = 196
   BorderStyle = bsSingle
   Caption = 'MIFARE Plus '#1072#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103
   ClientHeight = 444
@@ -14,6 +14,9 @@ object fmMifarePlusAuth: TfmMifarePlusAuth
   OldCreateOrder = False
   ShowHint = True
   OnCreate = FormCreate
+  DesignSize = (
+    424
+    444)
   PixelsPerInch = 96
   TextHeight = 13
   object gbAuth: TGroupBox
@@ -21,6 +24,7 @@ object fmMifarePlusAuth: TfmMifarePlusAuth
     Top = 8
     Width = 409
     Height = 177
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103' AES'
     TabOrder = 0
     DesignSize = (
@@ -175,6 +179,7 @@ object fmMifarePlusAuth: TfmMifarePlusAuth
     Top = 192
     Width = 409
     Height = 153
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1047#1072#1087#1080#1089#1100' AES128 '#1082#1083#1102#1095#1072' '#1074' SAM AV2'
     TabOrder = 1
     DesignSize = (
@@ -271,6 +276,7 @@ object fmMifarePlusAuth: TfmMifarePlusAuth
     Top = 352
     Width = 409
     Height = 73
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1040#1082#1090#1080#1074#1072#1094#1080#1103
     TabOrder = 2
     DesignSize = (

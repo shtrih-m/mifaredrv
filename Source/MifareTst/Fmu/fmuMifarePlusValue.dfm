@@ -13,6 +13,9 @@ object fmMifarePlusValue: TfmMifarePlusValue
   Font.Style = []
   OldCreateOrder = False
   ShowHint = True
+  DesignSize = (
+    448
+    408)
   PixelsPerInch = 96
   TextHeight = 13
   object gbData: TGroupBox
@@ -20,6 +23,7 @@ object fmMifarePlusValue: TfmMifarePlusValue
     Top = 208
     Width = 435
     Height = 161
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1044#1072#1085#1085#1099#1077' '#1073#1083#1086#1082#1072
     TabOrder = 1
     DesignSize = (
@@ -107,6 +111,7 @@ object fmMifarePlusValue: TfmMifarePlusValue
     Top = 8
     Width = 433
     Height = 193
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1041#1083#1086#1082'-'#1079#1085#1072#1095#1077#1085#1080#1077
     TabOrder = 0
     DesignSize = (

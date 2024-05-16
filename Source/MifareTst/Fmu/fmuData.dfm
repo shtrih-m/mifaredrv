@@ -4,7 +4,7 @@ object fmData: TfmData
   BorderStyle = bsSingle
   Caption = #1044#1072#1085#1085#1099#1077
   ClientHeight = 292
-  ClientWidth = 390
+  ClientWidth = 376
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,6 +13,9 @@ object fmData: TfmData
   Font.Style = []
   OldCreateOrder = False
   ShowHint = True
+  DesignSize = (
+    376
+    292)
   PixelsPerInch = 96
   TextHeight = 13
   object lblBBlock: TLabel
@@ -41,6 +44,7 @@ object fmData: TfmData
     Top = 40
     Width = 361
     Height = 41
+    Anchors = [akLeft, akTop, akRight]
     Shape = bsTopLine
   end
   object Bevel2: TBevel
@@ -48,6 +52,7 @@ object fmData: TfmData
     Top = 96
     Width = 361
     Height = 41
+    Anchors = [akLeft, akTop, akRight]
     Shape = bsTopLine
   end
   object edtBlockDataHex: TEdit
@@ -56,6 +61,7 @@ object fmData: TfmData
     Width = 177
     Height = 21
     Hint = 'BlockDataHex'
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 1
   end
   object btnPiccRead: TButton
@@ -64,6 +70,7 @@ object fmData: TfmData
     Width = 89
     Height = 25
     Hint = 'PiccRead'
+    Anchors = [akTop, akRight]
     Caption = #1055#1088#1086#1095#1080#1090#1072#1090#1100
     TabOrder = 0
     OnClick = btnPiccReadClick
@@ -74,6 +81,7 @@ object fmData: TfmData
     Width = 89
     Height = 25
     Hint = 'PiccWrite'
+    Anchors = [akTop, akRight]
     Caption = #1047#1072#1087#1080#1089#1072#1090#1100' Hex'
     TabOrder = 2
     OnClick = btnPiccWriteClick
@@ -84,6 +92,7 @@ object fmData: TfmData
     Width = 177
     Height = 21
     Hint = 'BlockData'
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 3
   end
   object btnWrite: TButton
@@ -92,6 +101,7 @@ object fmData: TfmData
     Width = 89
     Height = 25
     Hint = 'PiccWrite'
+    Anchors = [akTop, akRight]
     Caption = #1047#1072#1087#1080#1089#1072#1090#1100
     TabOrder = 4
     OnClick = btnWriteClick
@@ -102,6 +112,7 @@ object fmData: TfmData
     Width = 185
     Height = 22
     Hint = 'BlockNumber'
+    Anchors = [akLeft, akTop, akRight]
     MaxValue = 255
     MinValue = 0
     TabOrder = 5

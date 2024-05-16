@@ -14,6 +14,9 @@ object fmUltraLightC: TfmUltraLightC
   OldCreateOrder = False
   ShowHint = True
   OnCreate = FormCreate
+  DesignSize = (
+    448
+    469)
   PixelsPerInch = 96
   TextHeight = 13
   object gsAuth: TGroupBox
@@ -21,6 +24,7 @@ object fmUltraLightC: TfmUltraLightC
     Top = 8
     Width = 433
     Height = 169
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103
     TabOrder = 0
     DesignSize = (
@@ -156,6 +160,7 @@ object fmUltraLightC: TfmUltraLightC
     Top = 184
     Width = 433
     Height = 177
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1044#1072#1085#1085#1099#1077
     TabOrder = 1
     DesignSize = (

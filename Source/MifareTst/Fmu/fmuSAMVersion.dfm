@@ -13,6 +13,9 @@ object fmSAMVersion: TfmSAMVersion
   Font.Style = []
   OldCreateOrder = False
   ShowHint = True
+  DesignSize = (
+    376
+    166)
   PixelsPerInch = 96
   TextHeight = 13
   object btnSAM_GetVersion: TButton
@@ -21,6 +24,7 @@ object fmSAMVersion: TfmSAMVersion
     Width = 137
     Height = 25
     Hint = 'SAM_GetVersion'
+    Anchors = [akRight, akBottom]
     Caption = #1055#1086#1083#1091#1095#1080#1090#1100' '#1074#1077#1088#1089#1080#1102' SAM'
     TabOrder = 1
     OnClick = btnSAM_GetVersionClick
@@ -30,6 +34,7 @@ object fmSAMVersion: TfmSAMVersion
     Top = 8
     Width = 361
     Height = 121
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -13

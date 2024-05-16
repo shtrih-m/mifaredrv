@@ -14,6 +14,9 @@ object fmMifarePlusParams: TfmMifarePlusParams
   OldCreateOrder = False
   ShowHint = True
   OnCreate = FormCreate
+  DesignSize = (
+    424
+    174)
   PixelsPerInch = 96
   TextHeight = 13
   object gsParameters: TGroupBox
@@ -21,6 +24,7 @@ object fmMifarePlusParams: TfmMifarePlusParams
     Top = 8
     Width = 409
     Height = 113
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099
     TabOrder = 0
     DesignSize = (

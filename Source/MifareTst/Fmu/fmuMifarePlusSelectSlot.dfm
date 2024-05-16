@@ -2,7 +2,7 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
   Left = 457
   Top = 254
   BorderStyle = bsSingle
-  Caption = 'MIFARE Plus '
+  Caption = 'MIFARE Plus '#1074#1099#1073#1086#1088' '#1089#1083#1086#1090#1072
   ClientHeight = 320
   ClientWidth = 424
   Color = clBtnFace
@@ -14,6 +14,9 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
   OldCreateOrder = False
   ShowHint = True
   OnCreate = FormCreate
+  DesignSize = (
+    424
+    320)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -28,6 +31,7 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
     Top = 8
     Width = 409
     Height = 281
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1055#1077#1088#1077#1082#1083#1102#1095#1077#1085#1080#1077' '#1089#1083#1086#1090#1072' SAM AV2 '#1084#1086#1076#1091#1083#1103
     TabOrder = 0
     DesignSize = (
@@ -127,7 +131,7 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       MaxValue = 65535
       MinValue = 0
       TabOrder = 1
-      Value = 0
+      Value = 1
     end
     object chbUseOptional: TCheckBox
       Left = 8
@@ -136,6 +140,8 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       Height = 17
       Hint = 'UseOptional'
       Caption = #1055#1077#1088#1077#1076#1072#1074#1072#1090#1100' '#1076#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1081' '#1073#1072#1081#1090
+      Checked = True
+      State = cbChecked
       TabOrder = 2
     end
     object edtSlotNumber: TEdit
@@ -146,7 +152,6 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 4
-      Text = 'SlotNumber'
     end
     object edtSlotStatus0: TEdit
       Left = 120
@@ -157,7 +162,6 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 5
-      Text = 'SlotStatus0'
     end
     object edtSlotStatus1: TEdit
       Left = 120
@@ -168,7 +172,6 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 6
-      Text = 'SlotStatus1'
     end
     object edtSlotStatus2: TEdit
       Left = 120
@@ -179,7 +182,6 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 7
-      Text = 'SlotStatus2'
     end
     object edtSlotStatus3: TEdit
       Left = 120
@@ -190,7 +192,6 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 8
-      Text = 'SlotStatus3'
     end
     object edtSlotStatus4: TEdit
       Left = 120
@@ -201,7 +202,6 @@ object fmMifarePlusSelectSlot: TfmMifarePlusSelectSlot
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 9
-      Text = 'SlotStatus4'
     end
   end
 end

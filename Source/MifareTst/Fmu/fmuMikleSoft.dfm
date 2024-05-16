@@ -12,6 +12,9 @@ object fmMikleSoft: TfmMikleSoft
   Font.Style = []
   OldCreateOrder = False
   ShowHint = True
+  DesignSize = (
+    369
+    286)
   PixelsPerInch = 96
   TextHeight = 13
   object lblATQ: TLabel
@@ -40,6 +43,7 @@ object fmMikleSoft: TfmMikleSoft
     Top = 88
     Width = 353
     Height = 17
+    Anchors = [akLeft, akTop, akRight]
     Shape = bsTopLine
   end
   object edtATQ: TEdit
@@ -48,6 +52,7 @@ object fmMikleSoft: TfmMikleSoft
     Width = 121
     Height = 21
     Hint = 'ATQ'
+    Anchors = [akLeft, akTop, akRight]
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 1
@@ -58,6 +63,7 @@ object fmMikleSoft: TfmMikleSoft
     Width = 137
     Height = 25
     Hint = 'MksFindCard'
+    Anchors = [akTop, akRight]
     Caption = 'MksFindCard'
     TabOrder = 3
     OnClick = btnMksFindCardClick
@@ -68,6 +74,7 @@ object fmMikleSoft: TfmMikleSoft
     Width = 121
     Height = 21
     Hint = 'UIDHex'
+    Anchors = [akLeft, akTop, akRight]
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 2
@@ -78,6 +85,7 @@ object fmMikleSoft: TfmMikleSoft
     Width = 121
     Height = 21
     Hint = 'CardATQ'
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     Text = '0'
   end
@@ -87,6 +95,7 @@ object fmMikleSoft: TfmMikleSoft
     Width = 137
     Height = 25
     Hint = 'MksReopen'
+    Anchors = [akTop, akRight]
     Caption = 'MksReopen'
     TabOrder = 4
     OnClick = btnMksReopenClick
@@ -97,6 +106,7 @@ object fmMikleSoft: TfmMikleSoft
     Width = 137
     Height = 25
     Hint = 'MksWriteCatalog'
+    Anchors = [akTop, akRight]
     Caption = 'MksWriteCatalog'
     TabOrder = 7
     OnClick = btnMksWriteCatalogClick
@@ -107,6 +117,7 @@ object fmMikleSoft: TfmMikleSoft
     Width = 137
     Height = 25
     Hint = 'MksReadCatalog'
+    Anchors = [akTop, akRight]
     Caption = 'MksReadCatalog'
     TabOrder = 6
     OnClick = btnMksReadCatalogClick
@@ -116,6 +127,7 @@ object fmMikleSoft: TfmMikleSoft
     Top = 96
     Width = 209
     Height = 185
+    Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 5
   end
 end

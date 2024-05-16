@@ -14,6 +14,9 @@ object fmMifarePlusAuthSL2: TfmMifarePlusAuthSL2
   OldCreateOrder = False
   ShowHint = True
   OnCreate = FormCreate
+  DesignSize = (
+    424
+    338)
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -21,6 +24,7 @@ object fmMifarePlusAuthSL2: TfmMifarePlusAuthSL2
     Top = 8
     Width = 410
     Height = 169
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103' SL2 '#1082#1083#1102#1095#1086#1084' Crypto-1'
     TabOrder = 0
     DesignSize = (

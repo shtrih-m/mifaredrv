@@ -13,6 +13,9 @@ object fmPoll: TfmPoll
   OldCreateOrder = False
   ShowHint = True
   OnCreate = FormCreate
+  DesignSize = (
+    412
+    233)
   PixelsPerInch = 96
   TextHeight = 13
   object lblPortNumber: TLabel
@@ -20,6 +23,7 @@ object fmPoll: TfmPoll
     Top = 152
     Width = 69
     Height = 13
+    Anchors = [akLeft, akBottom]
     Caption = #1053#1086#1084#1077#1088' '#1087#1086#1088#1090#1072':'
   end
   object Memo: TMemo
@@ -27,6 +31,7 @@ object fmPoll: TfmPoll
     Top = 8
     Width = 393
     Height = 137
+    Anchors = [akLeft, akTop, akRight, akBottom]
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 0
@@ -37,6 +42,7 @@ object fmPoll: TfmPoll
     Width = 97
     Height = 25
     Hint = 'PollStart'
+    Anchors = [akLeft, akBottom]
     Caption = #1053#1072#1095#1072#1090#1100' '#1086#1087#1088#1086#1089
     TabOrder = 3
     OnClick = btnPollStartClick
@@ -47,6 +53,7 @@ object fmPoll: TfmPoll
     Width = 97
     Height = 25
     Hint = 'PollStop'
+    Anchors = [akLeft, akBottom]
     Caption = #1055#1088#1077#1088#1074#1072#1090#1100' '#1086#1087#1088#1086#1089
     TabOrder = 4
     OnClick = btnPollStopClick
@@ -56,6 +63,7 @@ object fmPoll: TfmPoll
     Top = 184
     Width = 97
     Height = 25
+    Anchors = [akLeft, akBottom]
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100
     TabOrder = 5
     OnClick = btnClearClick
@@ -67,6 +75,7 @@ object fmPoll: TfmPoll
     Height = 21
     Hint = 'PortNumber'
     Style = csDropDownList
+    Anchors = [akLeft, akBottom]
     ItemHeight = 13
     TabOrder = 1
   end
@@ -75,6 +84,7 @@ object fmPoll: TfmPoll
     Top = 184
     Width = 185
     Height = 17
+    Anchors = [akLeft, akBottom]
     Caption = #1040#1074#1090#1086#1086#1090#1082#1083#1102#1095#1077#1085#1080#1077' '#1086#1087#1088#1086#1089#1072
     TabOrder = 2
   end

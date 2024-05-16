@@ -13,6 +13,9 @@ object fmCardEmission: TfmCardEmission
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
+  DesignSize = (
+    448
+    311)
   PixelsPerInch = 96
   TextHeight = 13
   object gbOperations: TGroupBox
@@ -20,6 +23,7 @@ object fmCardEmission: TfmCardEmission
     Top = 8
     Width = 433
     Height = 265
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1047#1072#1087#1080#1089#1100' '#1079#1072#1096#1080#1092#1088#1086#1074#1072#1085#1085#1099#1093' AES128 '#1082#1083#1102#1095#1086#1084' '#1076#1072#1085#1085#1099#1093' '#1085#1072' '#1082#1072#1088#1090#1099
     ParentShowHint = False
     ShowHint = True

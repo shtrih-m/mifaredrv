@@ -12,6 +12,9 @@ object fmAuth: TfmAuth
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  DesignSize = (
+    391
+    291)
   PixelsPerInch = 96
   TextHeight = 13
   object lblKeyNumber: TLabel
@@ -62,6 +65,7 @@ object fmAuth: TfmAuth
     Width = 193
     Height = 25
     Hint = 'PiccAuth'
+    Anchors = [akTop, akRight]
     Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103' '#1079#1072#1087#1080#1089#1072#1085#1085#1099#1084' '#1082#1083#1102#1095#1086#1084
     ParentShowHint = False
     ShowHint = True
@@ -98,6 +102,7 @@ object fmAuth: TfmAuth
     Width = 185
     Height = 21
     Hint = 'UIDHex'
+    Anchors = [akLeft, akTop, akRight]
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
@@ -109,6 +114,7 @@ object fmAuth: TfmAuth
     Width = 129
     Height = 25
     Hint = 'EncodeKey'
+    Anchors = [akTop, akRight]
     Caption = #1050#1086#1076#1080#1088#1086#1074#1072#1090#1100' '#1082#1083#1102#1095
     ParentShowHint = False
     ShowHint = True
@@ -121,6 +127,7 @@ object fmAuth: TfmAuth
     Width = 129
     Height = 25
     Hint = 'PcdLoadKeyE2'
+    Anchors = [akTop, akRight]
     Caption = #1047#1072#1087#1080#1089#1072#1090#1100' '#1082#1083#1102#1095
     ParentShowHint = False
     ShowHint = True
@@ -133,6 +140,7 @@ object fmAuth: TfmAuth
     Width = 185
     Height = 21
     Hint = 'KeyUncoded'
+    Anchors = [akLeft, akTop, akRight]
     MaxLength = 12
     ParentShowHint = False
     ShowHint = True
@@ -145,6 +153,7 @@ object fmAuth: TfmAuth
     Width = 193
     Height = 25
     Hint = 'PiccAuthKey'
+    Anchors = [akTop, akRight]
     Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103' '#1087#1086' '#1082#1083#1102#1095#1091
     ParentShowHint = False
     ShowHint = True
@@ -157,6 +166,7 @@ object fmAuth: TfmAuth
     Width = 185
     Height = 21
     Hint = 'KeyEncoded'
+    Anchors = [akLeft, akTop, akRight]
     MaxLength = 24
     ParentShowHint = False
     ShowHint = True
@@ -169,6 +179,7 @@ object fmAuth: TfmAuth
     Width = 193
     Height = 25
     Hint = 'PiccActivateWakeUp'
+    Anchors = [akTop, akRight]
     Caption = #1040#1082#1090#1080#1074#1072#1094#1080#1103' '#1082#1072#1088#1090#1099
     ParentShowHint = False
     ShowHint = True
@@ -181,6 +192,7 @@ object fmAuth: TfmAuth
     Width = 185
     Height = 22
     Hint = 'KeyNumber'
+    Anchors = [akLeft, akTop, akRight]
     MaxValue = 255
     MinValue = 0
     ParentShowHint = False
@@ -194,6 +206,7 @@ object fmAuth: TfmAuth
     Width = 185
     Height = 22
     Hint = 'BlockNumber'
+    Anchors = [akLeft, akTop, akRight]
     MaxValue = 255
     MinValue = 0
     ParentShowHint = False

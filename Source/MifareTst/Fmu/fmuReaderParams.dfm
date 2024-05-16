@@ -13,6 +13,9 @@ object fmReaderParams: TfmReaderParams
   Font.Style = []
   OldCreateOrder = False
   ShowHint = True
+  DesignSize = (
+    424
+    355)
   PixelsPerInch = 96
   TextHeight = 13
   object gsParams: TGroupBox
@@ -20,6 +23,7 @@ object fmReaderParams: TfmReaderParams
     Top = 8
     Width = 409
     Height = 297
+    Anchors = [akLeft, akTop, akRight]
     Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099
     TabOrder = 0
     DesignSize = (

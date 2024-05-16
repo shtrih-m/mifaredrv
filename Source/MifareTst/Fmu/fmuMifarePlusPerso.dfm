@@ -24,6 +24,7 @@ object fmMifarePlusPerso: TfmMifarePlusPerso
     Top = 168
     Width = 409
     Height = 209
+    Anchors = [akLeft, akRight, akBottom]
     Caption = #1055#1077#1088#1089#1086#1085#1072#1083#1080#1079#1072#1094#1080#1103
     TabOrder = 0
     DesignSize = (
@@ -136,7 +137,7 @@ object fmMifarePlusPerso: TfmMifarePlusPerso
     Top = 8
     Width = 409
     Height = 153
-    Anchors = [akLeft, akTop, akRight]
+    Anchors = [akLeft, akTop, akRight, akBottom]
     BorderWidth = 5
     BorderStyle = bsSingle
     Color = clWindow
