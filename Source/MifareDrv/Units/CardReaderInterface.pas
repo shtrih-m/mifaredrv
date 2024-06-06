@@ -48,6 +48,15 @@ type
     KeyVersion: Integer;
   end;
 
+  { TMifarePlusAuthKey }
+
+  TMifarePlusAuthKey = record
+    AuthType: Integer;
+    BlockNumber: Integer;
+    KeyValue: AnsiString;
+    DivInput: AnsiString;
+  end;
+
   { TSAMAV2Key }
 
   TSAMAV2Key = record
@@ -279,7 +288,8 @@ type
       const BlockData: string);
     procedure MifarePlusAuthSL1(const P: TMifarePlusAuth);
     procedure MifarePlusAuthSL2(const P: TMifarePlusAuth);
-    procedure MifarePlusAuthSL3(const P: TMifarePlusAuth);
+    procedure MifarePlusAuthSL3(const P: TMifarePlusAuth; var Status: Integer);
+    procedure MifarePlusAuthSL3Key(const P: TMifarePlusAuthKey; var Status: Integer);
     procedure MifarePlusDecrement(const P: TMifarePlusDecrement);
     procedure MifarePlusDecrementTransfer(const P: TMifarePlusDecrement);
     procedure MifarePlusIncrement(const P: TMifarePlusIncrement);

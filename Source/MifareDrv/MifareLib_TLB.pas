@@ -12,10 +12,10 @@ unit MifareLib_TLB;
 // ************************************************************************ //
 
 // PASTLWTR : 1.2
-// File generated on 15.05.2024 9:41:33 from Type Library described below.
+// File generated on 06.06.2024 14:00:42 from Type Library described below.
 
 // ************************************************************************  //
-// Type Lib: D:\projects\MifareDrv\Source\MifareDrv\MifareDrv.tlb (1)
+// Type Lib: C:\projects\MifareDrv\Source\MifareDrv\MifareDrv.tlb (1)
 // LIBID: {11C2E197-6F27-42B2-A78C-40D7D0446092}
 // LCID: 0
 // Helpfile: 
@@ -1711,6 +1711,11 @@ type
     function Get_SlotStatus2: Integer; safecall;
     function Get_SlotStatus3: Integer; safecall;
     function Get_SlotStatus4: Integer; safecall;
+    function MifarePlusAuthSL3Key: Integer; safecall;
+    function Get_Status: Integer; safecall;
+    procedure Set_Status(Value: Integer); safecall;
+    function Get_DivInputHex: WideString; safecall;
+    procedure Set_DivInputHex(const Value: WideString); safecall;
     property SlotNumber: Integer read Get_SlotNumber write Set_SlotNumber;
     property UseOptional: WordBool read Get_UseOptional write Set_UseOptional;
     property OptionalValue: Integer read Get_OptionalValue write Set_OptionalValue;
@@ -1719,6 +1724,8 @@ type
     property SlotStatus2: Integer read Get_SlotStatus2;
     property SlotStatus3: Integer read Get_SlotStatus3;
     property SlotStatus4: Integer read Get_SlotStatus4;
+    property Status: Integer read Get_Status write Set_Status;
+    property DivInputHex: WideString read Get_DivInputHex write Set_DivInputHex;
   end;
 
 // *********************************************************************//
@@ -1737,6 +1744,9 @@ type
     property SlotStatus2: Integer readonly dispid 620;
     property SlotStatus3: Integer readonly dispid 621;
     property SlotStatus4: Integer readonly dispid 622;
+    function MifarePlusAuthSL3Key: Integer; dispid 623;
+    property Status: Integer dispid 624;
+    property DivInputHex: WideString dispid 625;
     property EventID: Integer dispid 501;
     property EventDriverID: Integer readonly dispid 502;
     property EventType: Integer readonly dispid 503;
@@ -2530,6 +2540,7 @@ type
     function MifarePlusAuthSL2Crypto1: Integer;
     function WriteEncryptedData: Integer;
     function MifarePlusSelectSAMSlot: Integer;
+    function MifarePlusAuthSL3Key: Integer;
     property  ControlInterface: IMifareDrv4 read GetControlInterface;
     property  DefaultInterface: IMifareDrv4 read GetControlInterface;
     property ATQ: Word index 87 read GetWordProp;
@@ -2695,6 +2706,8 @@ type
     property SlotNumber: Integer index 614 read GetIntegerProp write SetIntegerProp stored False;
     property UseOptional: WordBool index 615 read GetWordBoolProp write SetWordBoolProp stored False;
     property OptionalValue: Integer index 616 read GetIntegerProp write SetIntegerProp stored False;
+    property Status: Integer index 624 read GetIntegerProp write SetIntegerProp stored False;
+    property DivInputHex: WideString index 625 read GetWideStringProp write SetWideStringProp stored False;
     property OnCardFound: TMifareDrvCardFound read FOnCardFound write FOnCardFound;
     property OnPollError: TMifareDrvPollError read FOnPollError write FOnPollError;
     property OnDriverEvent: TMifareDrvDriverEvent read FOnDriverEvent write FOnDriverEvent;
@@ -2861,6 +2874,7 @@ type
     function MifarePlusAuthSL2Crypto1: Integer;
     function WriteEncryptedData: Integer;
     function MifarePlusSelectSAMSlot: Integer;
+    function MifarePlusAuthSL3Key: Integer;
     property  ControlInterface: IMifareDrv4 read GetControlInterface;
     property  DefaultInterface: IMifareDrv4 read GetControlInterface;
     property ATQ: Word index 87 read GetWordProp;
@@ -3026,6 +3040,8 @@ type
     property SlotNumber: Integer index 614 read GetIntegerProp write SetIntegerProp stored False;
     property UseOptional: WordBool index 615 read GetWordBoolProp write SetWordBoolProp stored False;
     property OptionalValue: Integer index 616 read GetIntegerProp write SetIntegerProp stored False;
+    property Status: Integer index 624 read GetIntegerProp write SetIntegerProp stored False;
+    property DivInputHex: WideString index 625 read GetWideStringProp write SetWideStringProp stored False;
   end;
 
 procedure Register;
@@ -4532,6 +4548,11 @@ begin
   Result := DefaultInterface.MifarePlusSelectSAMSlot;
 end;
 
+function TMifareDrv.MifarePlusAuthSL3Key: Integer;
+begin
+  Result := DefaultInterface.MifarePlusAuthSL3Key;
+end;
+
 procedure TMifareDrv4.InitControlData;
 const
   CControlData: TControlData2 = (
@@ -4539,7 +4560,7 @@ const
     EventIID: '';
     EventCount: 0;
     EventDispIDs: nil;
-    LicenseKey: nil (*HR:$80040154*);
+    LicenseKey: nil (*HR:$00000000*);
     Flags: $00000000;
     Version: 401);
 begin
@@ -5276,6 +5297,11 @@ end;
 function TMifareDrv4.MifarePlusSelectSAMSlot: Integer;
 begin
   Result := DefaultInterface.MifarePlusSelectSAMSlot;
+end;
+
+function TMifareDrv4.MifarePlusAuthSL3Key: Integer;
+begin
+  Result := DefaultInterface.MifarePlusAuthSL3Key;
 end;
 
 procedure Register;

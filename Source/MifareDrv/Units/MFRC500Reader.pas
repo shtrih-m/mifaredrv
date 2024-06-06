@@ -115,7 +115,8 @@ type
       const BlockData: string);
     procedure MifarePlusAuthSL1(const P: TMifarePlusAuth);
     procedure MifarePlusAuthSL2(const P: TMifarePlusAuth);
-    procedure MifarePlusAuthSL3(const P: TMifarePlusAuth);
+    procedure MifarePlusAuthSL3(const P: TMifarePlusAuth; var Status: Integer);
+    procedure MifarePlusAuthSL3Key(const P: TMifarePlusAuthKey; var Status: Integer);
     procedure MifarePlusDecrement(const P: TMifarePlusDecrement);
     procedure MifarePlusDecrementTransfer(const P: TMifarePlusDecrement);
     procedure MifarePlusIncrement(const P: TMifarePlusIncrement);
@@ -1505,14 +1506,18 @@ end;
 
 ******************************************************************************)
 
-procedure TMFRC500Reader.MifarePlusAuthSL3(const P: TMifarePlusAuth);
+procedure TMFRC500Reader.MifarePlusAuthSL3(const P: TMifarePlusAuth; var Status: Integer);
+var
+  Answer: AnsiString;
+  Command: AnsiString;
 begin
-  SendCommand(
-    #$44 +
-    Chr(P.AuthType) +
-    IntToBin(P.BlockNumber, 2) +
-    Chr(P.KeyNumber) +
-    Chr(P.KeyVersion));
+  Command := #$44 + Chr(P.AuthType) + IntToBin(P.BlockNumber, 2) +
+    Chr(P.KeyNumber) + Chr(P.KeyVersion);
+  Answer := SendCommand(Command);
+  if Length(Answer) > 0 then
+  begin
+    Status := Ord(Answer[1]);
+  end;
 end;
 
 (******************************************************************************
@@ -1825,5 +1830,30 @@ begin
   end;
 end;
 
+(*
+"Авторизация SL3 по переданному ключу"
+ReaderOldCommand_PICC_SL3_SW_AUTHENTICATION    0x4E
+Авторизация  к карте Mifare Plus SL3, с переключением на SW keystore, и ключ из команды
+Input: 1 byte - auth_type, 2 bytes - blocknumber, 16 bytes - key_value, optional 1 to 31 bytes DivInput
+Output: 1 byte - status
+*)
+
+procedure TMFRC500Reader.MifarePlusAuthSL3Key(const P: TMifarePlusAuthKey;
+  var Status: Integer);
+var
+  Answer: string;
+  Command: string;
+begin
+  if Length(P.KeyValue) < 16 then
+    raise Exception.Create('Invalid KeyValue length. Must be 16 bytes');
+
+  Command := #$4E + Chr(P.AuthType) + IntToBin(P.BlockNumber, 2) +
+    Copy(P.KeyValue, 1, 16) + P.DivInput;
+  Answer := SendCommand(Command);
+  if Length(Answer) > 0 then
+  begin
+    Status := Ord(Answer[1]);
+  end;
+end;
 
 end.

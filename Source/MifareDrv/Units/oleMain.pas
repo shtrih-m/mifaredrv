@@ -176,6 +176,10 @@ type
     procedure Set_AnswerSignature(Value: WordBool); safecall;
     procedure Set_CommandSignature(Value: WordBool); safecall;
     procedure Set_EncryptionEnabled(Value: WordBool); safecall;
+    function Get_Status: Integer; safecall;
+    procedure Set_Status(Value: Integer); safecall;
+    function Get_DivInputHex: WideString; safecall;
+    procedure Set_DivInputHex(const Value: WideString); safecall;
   public
     procedure Initialize; override;
     procedure AboutBox; safecall;
@@ -431,6 +435,7 @@ type
     function Get_SlotStatus2: Integer; safecall;
     function Get_SlotStatus3: Integer; safecall;
     function Get_SlotStatus4: Integer; safecall;
+    function MifarePlusAuthSL3Key: Integer; safecall;
 
     function Get_PollActivateMethod: TPollActivateMethod; safecall;
     procedure Set_PollActivateMethod(Value: TPollActivateMethod); safecall;
@@ -3335,6 +3340,41 @@ begin
   LogMethodName('Set_OptionalValue');
   Driver.OptionalValue := Value;
   LogMethodValue('Set_OptionalValue', Value);
+end;
+
+function TMifareDrv.MifarePlusAuthSL3Key: Integer;
+begin
+  LogMethodName('MifarePlusAuthSL3Key');
+  Result := Driver.MifarePlusAuthSL3Key;
+  LogMethodValue('MifarePlusAuthSL3Key', Result);
+end;
+
+function TMifareDrv.Get_Status: Integer;
+begin
+  LogMethodName('Get_Status');
+  Result := Driver.Status;
+  LogMethodValue('Get_Status', Result);
+end;
+
+procedure TMifareDrv.Set_Status(Value: Integer);
+begin
+  LogMethodName('Set_Status');
+  Driver.Status := Value;
+  LogMethodValue('Set_Status', Value);
+end;
+
+function TMifareDrv.Get_DivInputHex: WideString;
+begin
+  LogMethodName('Get_DivInputHex');
+  Result := Driver.DivInputHex;
+  LogMethodValue('Get_DivInputHex', Result);
+end;
+
+procedure TMifareDrv.Set_DivInputHex(const Value: WideString);
+begin
+  LogMethodName('Set_DivInputHex');
+  Driver.DivInputHex := Value;
+  LogMethodValue('Set_DivInputHex', Value);
 end;
 
 end.

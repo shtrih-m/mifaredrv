@@ -106,7 +106,8 @@ type
       const BlockData: string);
     procedure MifarePlusAuthSL1(const P: TMifarePlusAuth);
     procedure MifarePlusAuthSL2(const P: TMifarePlusAuth);
-    procedure MifarePlusAuthSL3(const P: TMifarePlusAuth);
+    procedure MifarePlusAuthSL3(const P: TMifarePlusAuth; var Status: Integer);
+    procedure MifarePlusAuthSL3Key(const P: TMifarePlusAuthKey; var Status: Integer);
     procedure MifarePlusDecrement(const P: TMifarePlusDecrement);
     procedure MifarePlusDecrementTransfer(const P: TMifarePlusDecrement);
     procedure MifarePlusIncrement(const P: TMifarePlusIncrement);
@@ -753,7 +754,8 @@ begin
 
 end;
 
-procedure TOmnikeyCardReader.MifarePlusAuthSL3(const P: TMifarePlusAuth);
+procedure TOmnikeyCardReader.MifarePlusAuthSL3(const P: TMifarePlusAuth;
+  var Status: Integer);
 begin
 
 end;
@@ -854,6 +856,12 @@ end;
 
 procedure TOmnikeyCardReader.MifarePlusSelectSAMSlot(const P: TSelectSAM;
   var R: TSelectSAMAnswer);
+begin
+
+end;
+
+procedure TOmnikeyCardReader.MifarePlusAuthSL3Key(
+  const P: TMifarePlusAuthKey; var Status: Integer);
 begin
 
 end;

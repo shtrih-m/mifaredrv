@@ -152,6 +152,8 @@ type
     function GetPollActivateMethod: TPollActivateMethod;
     procedure SetPollActivateMethod(const Value: TPollActivateMethod);
     function GetDeviceType: TDeviceType;
+    function GetDivInputHex: AnsiString;
+    procedure SetDivInputHex(const Value: AnsiString);
   private
     FSAK: Byte;
     FUIDLen: Byte;
@@ -248,6 +250,8 @@ type
     SlotStatus2: Integer;
     SlotStatus3: Integer;
     SlotStatus4: Integer;
+    Status: Integer;
+    DivInput: AnsiString;
 
     constructor Create;
     destructor Destroy; override;
@@ -364,6 +368,7 @@ type
     function MifarePlusAuthSL1: Integer;
     function MifarePlusAuthSL2: Integer;
     function MifarePlusAuthSL3: Integer;
+    function MifarePlusAuthSL3Key: Integer;
     function MifarePlusDecrement: Integer;
     function MifarePlusDecrementTransfer: Integer;
     function MifarePlusIncrement: Integer;
@@ -495,8 +500,8 @@ type
     property SAMMDProductionMonth: Integer read Get_SAMMDProductionMonth;
     property SAMMDProductionYear: Integer read Get_SAMMDProductionYear;
     property SAMMDGlobalCryptoSettings: Integer read Get_SAMMDGlobalCryptoSettings;
-    property PollActivateMethod: TPollActivateMethod read GetPollActivateMethod
-    write SetPollActivateMethod;
+    property PollActivateMethod: TPollActivateMethod read GetPollActivateMethod write SetPollActivateMethod;
+    property DivInputHex: AnsiString read GetDivInputHex write SetDivInputHex;
   end;
 
 implementation
@@ -2744,7 +2749,7 @@ begin
     P.BlockNumber := BlockNumber;
     P.KeyNumber := KeyNumber;
     P.KeyVersion := KeyVersion;
-    CardReader.MifarePlusAuthSL3(P);
+    CardReader.MifarePlusAuthSL3(P, Status);
     Result := ClearResult;
   except
     on E: Exception do
@@ -3307,6 +3312,33 @@ begin
     on E: Exception do
       Result := HandleException(E);
   end;
+end;
+
+function TDriver.MifarePlusAuthSL3Key: Integer;
+var
+  P: TMifarePlusAuthKey;
+begin
+  try
+    P.AuthType := AuthType;
+    P.BlockNumber := BlockNumber;
+    P.KeyValue := BlockData;
+    P.DivInput := DivInput;
+    CardReader.MifarePlusAuthSL3Key(P, Status);
+    Result := ClearResult;
+  except
+    on E: Exception do
+      Result := HandleException(E);
+  end;
+end;
+
+function TDriver.GetDivInputHex: AnsiString;
+begin
+  Result := StrToHex(DivInput);
+end;
+
+procedure TDriver.SetDivInputHex(const Value: AnsiString);
+begin
+  DivInput := HexToStr(Value);
 end;
 
 end.
