@@ -18,7 +18,7 @@ object fmMain: TfmMain
   OnCreate = FormCreate
   DesignSize = (
     656
-    580)
+    581)
   PixelsPerInch = 96
   TextHeight = 13
   object lblResult: TLabel

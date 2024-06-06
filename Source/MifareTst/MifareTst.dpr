@@ -44,6 +44,7 @@ uses
   fmuMifarePlusSelectSlot in 'Fmu\fmuMifarePlusSelectSlot.pas' {fmMifarePlusSelectSlot},
   MifareTypes in 'Units\MifareTypes.pas',
   fmuMifarePlusValue in 'Fmu\fmuMifarePlusValue.pas' {fmMifarePlusValue},
+  fmuMifarePlusAuthSL3 in 'Fmu\fmuMifarePlusAuthSL3.pas' {fmMifarePlusAuthSL3},
   fmuMifarePlusAuth in 'Fmu\fmuMifarePlusAuth.pas' {fmMifarePlusAuth};
 
 {$R *.RES}
