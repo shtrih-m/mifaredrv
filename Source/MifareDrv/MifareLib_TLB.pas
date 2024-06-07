@@ -12,10 +12,10 @@ unit MifareLib_TLB;
 // ************************************************************************ //
 
 // PASTLWTR : 1.2
-// File generated on 06.06.2024 14:00:42 from Type Library described below.
+// File generated on 07.06.2024 8:51:40 from Type Library described below.
 
 // ************************************************************************  //
-// Type Lib: C:\projects\MifareDrv\Source\MifareDrv\MifareDrv.tlb (1)
+// Type Lib: D:\projects\MifareDrv\Source\MifareDrv\MifareDrv.tlb (1)
 // LIBID: {11C2E197-6F27-42B2-A78C-40D7D0446092}
 // LCID: 0
 // Helpfile: 
@@ -4560,7 +4560,7 @@ const
     EventIID: '';
     EventCount: 0;
     EventDispIDs: nil;
-    LicenseKey: nil (*HR:$00000000*);
+    LicenseKey: nil (*HR:$80040154*);
     Flags: $00000000;
     Version: 401);
 begin
