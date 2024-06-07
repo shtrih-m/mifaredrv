@@ -55,7 +55,7 @@ begin
     Driver.BlockNumber := seBlockNumber.Value;
     Driver.BlockDataHex := edtBlockDataHex.Text;
     Driver.DivInputHex := edtDivInputHex.Text;
-    if Driver.MifarePlusAuthSL3 = 0 then
+    if Driver.MifarePlusAuthSL3Key = 0 then
     begin
       edtStatus.Text := IntToStr(Driver.Status);
     end;
